@@ -1,0 +1,37 @@
+{
+  "name": "nvm",
+  "version": "1.0.0",
+  "description": "Stub REST servers with plain old javascript objects.",
+  "main": "mirage.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "verify"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nishants/mirage.git"
+  },
+  "keywords": [
+    "mirage",
+    "REST",
+    "stubbing",
+    "javacript",
+    "wiremock",
+    "stub",
+    "http",
+    "json",
+    "server"
+  ],
+  "author": "dawn",
+  "license": "WTFPL",
+  "bugs": {
+    "url": "https://github.com/nishants/mirage/issues"
+  },
+  "homepage": "https://github.com/nishants/mirage#readme",
+  "dependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^2.4.5"
+  }
+}
