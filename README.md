@@ -1,12 +1,12 @@
 # Mirage
 
-This is a framework for quickly setting up a RESTful service for serving json responses in context of incoming requests.
+This is a framework for quickly stubbing a RESTful service and serving responses by incoming requests.
 
 It has two main features:
 
-1. Defining a webserver purely on basis of request/response contract.
+1. Defining a webserver purely on basis of request/response json contracts.
 
-2. Using json templates just like our forefathers did with html (in the days of      server side html rendering).
+2. Json templates.
 
 ## JSO-NG
 
@@ -100,3 +100,4 @@ Then if a request is made to url "/user?search=searchme&page=32&size=21", above 
     "size": "21"
 }
 ```
+
