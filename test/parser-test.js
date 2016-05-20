@@ -27,4 +27,23 @@ describe('Parse JSO-NG', function() {
     expect(parsed.item.id).to.equal("my-some-id");
   });
 
+  it('should parse complex sub trees', function () {
+    var scope       = fakeScope({
+          "id"      : "some-id",
+          "name"    : "some-name",
+          "address" : "some-address"
+        }),
+        template = {
+          item: {
+            id      : "my-{{id}}",
+            name    : "my-{{name}}",
+            address : "my-{{address}}"
+          }},
+        parsed   = parser.parse(scope, template);
+
+    expect(parsed.item.id).to.equal("my-some-id");
+    expect(parsed.item.name).to.equal("my-some-name");
+    expect(parsed.item.address).to.equal("my-some-address");
+  });
+
 });
