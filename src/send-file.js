@@ -5,11 +5,14 @@ var fs = require("fs"),
 var readFile = function (path) {
       return JSON.parse(fs.readFileSync(path));
     },
+    parseRequest = function(req){
+      return {body: req.body};
+    },
     sendFile = function (path) {
       return {
         path: path,
         send: function (req, res) {
-          var scope       = scopes.create({request: {body: req.body}}),
+          var scope       = scopes.create({request: parseRequest(req)}),
               template    = readFile(this.path),
               parsed      = parser.parse(scope, template),
               responseBody= parsed.body;
