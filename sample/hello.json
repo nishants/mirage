@@ -1,5 +1,6 @@
 {
-  "response" : {
-    "body": "hello"
+  "body": {
+    "message": "hello",
+    "id": "{{0 + 1 }}"
   }
 }
