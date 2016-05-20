@@ -7,13 +7,15 @@ var parse = function (scope, template) {
         hasExpressions  = isString ? nodeValue.indexOf("{{") != -1 : false,
         expression      = hasExpressions ? nodeValue.split("{{")[1].split("}}")[0] : null,
         expressionValue = expression ? scope.execute(expression) : null,
-        replace         = expressionValue ? nodeValue.replace("{{"+expression+"}}", expressionValue) : nodeValue;
+        replace         = expressionValue ? nodeValue.replace("{{"+expression+"}}", expressionValue) : nodeValue,
+        isSubtree       = (typeof nodeValue == "object");
 
-    result[node] = replace;
+    result[node] = isSubtree ? parse(scope, nodeValue) : replace;
   }
 
   return result;
 };
+
 module.exports = {
   parse : function(scope, template){
     return parse(scope, template);
