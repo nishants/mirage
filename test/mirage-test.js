@@ -1,6 +1,5 @@
 var expect  = require('chai').expect,
     http    = require("http"),
-    fixture = require("./support/fixture"),
     mirage  = require("../src/mirage"),
     request = require('supertest');
 
