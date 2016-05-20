@@ -78,7 +78,7 @@ Then if a request is made to url "user/101", above template renders to :
 ## Using request url params in response : 
 Given we declare following url :
 
- ```javascript
+```javascript
 mirage.get("/user").sendFile("../sample/request-url-param.json");
 ```
 
@@ -101,3 +101,39 @@ Then if a request is made to url __"/user?search=searchme&page=32&size=21"__; th
 }
 ```
 
+## Using request body in response : 
+
+Given we declare following url :
+```javascript
+mirage.post("/user").sendFile("../sample/create.json");
+```
+and __create.json__ is : 
+```json
+ {
+  "body": {
+    "id"      :"1",
+    "name"    : "{{request.body.name}}",
+    "address" : {
+      "street" : "{{request.body.address.street}}"
+    }
+  }
+}
+```
+And we make a __POST__ request is made to url __"/user"__ with below body : 
+```json
+{
+    "name": "Me",
+    "address": {
+      "street" : "MyPlace"
+    }
+}
+```
+
+Then we get following reponse : 
+{
+    "id": "1",
+    "name": "Me",
+    "address": {
+        "street": "MyPlace"
+    }
+}
