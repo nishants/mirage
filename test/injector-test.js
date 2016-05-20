@@ -6,9 +6,9 @@ describe('Injector Test', function() {
     var serviceOne   = {name: "service-one"},
         serviceTwo   = {call: function(){return "service-two";}},
         dependencies = ["serviceOne", "serviceTwo"],
-        target = function(serviceOne, serviceTwo){
-          expect(serviceOne.name).to.equal("service-one");
-          expect(serviceTwo.call()).to.equal("service-two");
+        target = function(one, two){
+          expect(one.name).to.equal("service-one");
+          expect(two.call()).to.equal("service-two");
           done();
         };
 
