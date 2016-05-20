@@ -1,4 +1,5 @@
 var express = require('express'),
+    mapping = require('./url-mapping'),
     app = express();
 
 module.exports  = {
@@ -6,15 +7,6 @@ module.exports  = {
     return app;
   },
   get: function(url){
-    return {
-      sendFile: function(path){
-        app.get(url, function(req, res) {
-          res.status(200).json({
-            name: 'i can see you!',
-            path: path
-          });
-        })
-      }
-    };
+    return mapping.map(app, url);
   }
 }
