@@ -1,0 +1,6 @@
+{
+  "body": {
+    "id"      :"{{request.params.id}}",
+    "name"    : "someone"
+  }
+}

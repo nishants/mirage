@@ -38,4 +38,19 @@ describe('Mirage', function() {
           done();
         });
   });
+
+  it('should add request path param to template scope', function (done) {
+    var app     = mirage.start();
+
+    mirage.get("/user/:id").sendFile("sample/request-path-param.json");
+
+    request(app)
+        .get("/user/21")
+        .expect("Content-Type", /json/)
+        .expect(200)
+        .end(function(err, res) {
+          expect(res.body.id).to.equal("21");
+          done();
+        });
+  });
 });
