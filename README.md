@@ -3,7 +3,9 @@
 This is a framework for quickly setting up a RESTful service for serving json responses in context of incoming requests.
 
 It has two main features:
+
 1. Defining a webserver purely on basis of request/response contract.
+
 2. Using json templates just like our forefathers did with html (in the days of      server side html rendering).
 
 ### JSO-NG
