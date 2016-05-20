@@ -82,7 +82,7 @@ Given we declare following url :
 mirage.get("/user").sendFile("../sample/request-url-param.json");
 ```
 
- and request-url-param.json is : 
+ and __request-url-param.json__ is : 
  ```javascript
 {
   "body": {
@@ -92,7 +92,7 @@ mirage.get("/user").sendFile("../sample/request-url-param.json");
   }
 }
 ```
-Then if a request is made to url "/user?search=searchme&page=32&size=21", above template renders to : 
+Then if a request is made to url __"/user?search=searchme&page=32&size=21"__; the above template renders to : 
  ```json
 {
     "search": "searchme",
