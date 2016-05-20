@@ -1,5 +1,5 @@
 var express = require('express'),
-    mapping = require('./url-mapping'),
+    mappings = require('./url-mapping'),
     app = express();
 
 module.exports  = {
@@ -7,6 +7,8 @@ module.exports  = {
     return app;
   },
   get: function(url){
-    return mapping.map(app, url);
+    var mapping = mappings.create();
+    app.get(url, mapping.send());
+    return mapping;
   }
 }

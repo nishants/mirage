@@ -1,13 +1,18 @@
 module.exports  = {
-  map: function(app, url){
+  create: function(){
     return {
-      sendFile: function(path){
-        app.get(url, function(req, res) {
+      file: undefined,
+      send: function(){
+        var self = this;
+        return function(req, res){
           res.status(200).json({
             name: 'i can see you!',
-            path: path
-          });
-        })
+            path: self.file
+          })
+        }
+      },
+      sendFile: function(path){
+        this.file = path;
       }
     };
   }
