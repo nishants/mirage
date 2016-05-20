@@ -1,31 +1,28 @@
 var expect  = require('chai').expect,
-    execute  = require("../src/executer");
+    scope  = require("../src/scope");
 
 describe('Execute JS', function() {
   it('should inject fields with primary values to context', function () {
-    var scope      = {id: 1},
-        expression = "id + 99";
-    expect(execute.execute(scope, expression)).to.equal(100);
+    var expression = "id + 99";
+    expect(scope.execute({id: 1}, expression)).to.equal(100);
   });
 
   it('should allow operation on context values', function () {
-    var scope      = {id: 1, name: "Vijay"},
-        expression = '(id + 99) + "-" + name';
-    expect(execute.execute(scope, expression)).to.equal("100-Vijay");
+    var expression = '(id + 99) + "-" + name';
+    expect(scope.execute({id: 1, name: "Vijay"}, expression)).to.equal("100-Vijay");
   });
 
   it('should not update context values', function () {
-    var scope      = {id: 1, name: "Vijay"},
-        expression = 'id = 2';
-    expect(execute.execute(scope, expression)).to.equal(2);
-    expect(scope.id).to.equal(1);
+    var expression = 'id = 2';
+    var subScope = {id: 1, name: "Vijay"};
+    expect(scope.execute(subScope, expression)).to.equal(2);
+    expect(subScope.id).to.equal(1);
   });
 
   it('should inject object fields', function () {
-    var scope      = {data: {id: 1, address: {street: "my-home"}}},
-        expression = 'data.id + "-" + data.address.street';
+    var expression = 'data.id + "-" + data.address.street';
 
-    expect(execute.execute(scope, expression)).to.equal("1-my-home");
+    expect(scope.execute({data: {id: 1, address: {street: "my-home"}}}, expression)).to.equal("1-my-home");
   });
 
 });
