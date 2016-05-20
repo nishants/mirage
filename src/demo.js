@@ -1,6 +1,7 @@
 var mirage     = require("./mirage").create();
 mirage.post("/user").sendFile("../sample/create.json");
-mirage.get("/user").sendFile("../sample/hello.json");
+mirage.get("/user/:id").sendFile("../sample/request-path-param.json");
+mirage.get("/user").sendFile("../sample/request-url-param.json");
 
 mirage.app.listen(3000, function () {
   console.log('Example app listening on port 3000!');
