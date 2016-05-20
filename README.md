@@ -30,7 +30,6 @@ You can use this to quickly setup a web-server that can stub a RESTful json base
    console.log('Example app listening on port 3000!');
  });
 ```
-You can find the sample json templates in sample/ directory.
 
 ## Using expressions in JSO-NG
 
