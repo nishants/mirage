@@ -6,11 +6,15 @@ var execute = function (scope, expression) {
   scope.execute = function () {
     return eval(contextScript + "eval('<expression>');".replace("<expression>", expression));
   };
-
   return scope.execute();
 };
 module.exports = {
-  create : function(){
-    return {execute: execute};
+  create : function(scope){
+    var scope = scope;
+    return {
+      execute: function(expression){
+        return execute(scope, expression);
+      }
+    };
   }
 };
