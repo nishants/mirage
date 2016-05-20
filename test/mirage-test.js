@@ -1,15 +1,15 @@
 var expect  = require('chai').expect,
     http    = require("http"),
-    mirage  = require("../src/mirage"),
+    Mirage = require("../src/mirage"),
     request = require('supertest');
 
 describe('Mirage', function() {
   it('should parse expressions in response and add request to scope', function (done) {
-    var app     = mirage.start();
+    var mirage     = Mirage.create();
 
     mirage.get("/user").sendFile("sample/hello.json");
 
-    request(app)
+    request(mirage.app)
         .get("/user", "")
         .expect("Content-Type", /json/)
         .expect(200)
@@ -21,11 +21,11 @@ describe('Mirage', function() {
   });
 
   it('should add request body in template scope', function (done) {
-    var app     = mirage.start();
+    var mirage     = Mirage.create();
 
     mirage.post("/user").sendFile("sample/create.json");
 
-    request(app)
+    request(mirage.app)
         .post("/user", {name: "My User", address: {street: "My Home"}})
         .send({name: "My User", address: {street: "My Home"}})
         .expect("Content-Type", /json/)
@@ -39,11 +39,11 @@ describe('Mirage', function() {
   });
 
   it('should add request path param to template scope', function (done) {
-    var app     = mirage.start();
+    var mirage     = Mirage.create();
 
     mirage.get("/user/:id").sendFile("sample/request-path-param.json");
 
-    request(app)
+    request(mirage.app)
         .get("/user/21")
         .expect("Content-Type", /json/)
         .expect(200)
@@ -54,11 +54,10 @@ describe('Mirage', function() {
   });
 
   it('should add url params to template scope', function (done) {
-    var app     = mirage.start();
-
+    var mirage     = Mirage.create();
     mirage.get("/user").sendFile("sample/request-url-param.json");
 
-    request(app)
+    request(mirage.app)
         .get("/user"+encodeURI("?search=who wat that&page=1&size=10"))
         .expect("Content-Type", /json/)
         .expect(200)
@@ -69,5 +68,4 @@ describe('Mirage', function() {
           done();
         });
   });
-
 });
