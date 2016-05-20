@@ -6,8 +6,8 @@ module.exports  = {
         var self = this;
         return function(req, res){
           res.status(200).json({
-            name: 'i can see you!',
-            path: self.file
+            message: "hello",
+            id: "1"
           })
         }
       },

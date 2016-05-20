@@ -1,7 +1,6 @@
 {
   "body": {
     "message": "hello",
-    "id": "{{0 + 1 }}",
-    "youSaid" : "request.body"
+    "id": "{{0 + 1 }}"
   }
 }

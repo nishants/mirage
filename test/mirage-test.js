@@ -16,8 +16,8 @@ describe('Mirage', function() {
         .expect("Content-Length", "15")
         .expect(200)
         .end(function(err, res) {
-          expect(res.body.name).to.equal("i can see you!");
-          expect(res.body.path).to.equal("../sample/hello.json");
+          expect(res.body.message).to.equal("hello");
+          expect(res.body.id).to.equal("1");
           done();
         });
   });
