@@ -8,12 +8,13 @@ var execute = function (scope, expression) {
   };
   return scope.execute();
 };
+
 module.exports = {
   create : function(scope){
-    var scope = scope;
     return {
+      $scope: scope,
       execute: function(expression){
-        return execute(scope, expression);
+        return execute(this.$scope, expression);
       }
     };
   }
