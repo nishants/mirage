@@ -32,11 +32,11 @@
   "homepage": "https://github.com/nishants/mirage#readme",
   "dependencies": {
     "body-parser": "^1.15.1",
-    "chai": "^3.5.0",
-    "mocha": "^2.4.5"
+    "express": "^4.13.4"
   },
   "devDependencies": {
-    "express": "^4.13.4",
-    "supertest": "^1.2.0"
+    "supertest": "^1.2.0",
+    "chai": "^3.5.0",
+    "mocha": "^2.4.5"
   }
 }

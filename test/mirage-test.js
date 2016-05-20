@@ -4,7 +4,7 @@ var expect  = require('chai').expect,
     request = require('supertest');
 
 describe('Mirage', function() {
-  it('should parse expressions in response and add request to scope', function (done) {
+  it('should parse expressions in json template', function (done) {
     var mirage     = Mirage.create();
 
     mirage.get("/user").sendFile("sample/hello.json");
