@@ -8,12 +8,12 @@ describe('Mirage', function() {
   it('should parse expressions in response and add request to scope', function (done) {
     var app     = mirage.start();
 
-    mirage.get("/user").sendFile("../sample/hello.json");
+    //mirage.filesFrom("../sample");
+    mirage.get("/user").sendFile("sample/hello.json");
 
     request(app)
         .get("/user", "")
         .expect("Content-Type", /json/)
-        .expect("Content-Length", "15")
         .expect(200)
         .end(function(err, res) {
           expect(res.body.message).to.equal("hello");
