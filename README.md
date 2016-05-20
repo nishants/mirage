@@ -56,11 +56,12 @@ Then making a __GET__ request to __'/user'__ results in :
  ```
 ## Using request path parameters
 Given we declare following url :
- ```javascript
+
+```javascript
  mirage.get("/user/:id").sendFile("../sample/request-path-param.json");
 ```
- and __request-path-param.json__ is : 
- ```javascript
+and __request-path-param.json__ is : 
+```javascript
 {
   "body": {
     "id"      :"{{request.path.id}}",
@@ -69,10 +70,10 @@ Given we declare following url :
 }
 ```
 Then if a request is made to url "user/101", above template renders to : 
- ```json
- {
-    "id": "101",
-    "name": "someone"
+```json
+{
+  "id": "101",
+  "name": "someone"
 }
 ```
 ## Using request url params in response : 
@@ -82,8 +83,8 @@ Given we declare following url :
 mirage.get("/user").sendFile("../sample/request-url-param.json");
 ```
 
- and __request-url-param.json__ is : 
- ```javascript
+and __request-url-param.json__ is : 
+```javascript
 {
   "body": {
     "search"  :"{{request.query.search}}",
@@ -92,8 +93,9 @@ mirage.get("/user").sendFile("../sample/request-url-param.json");
   }
 }
 ```
+
 Then if a request is made to url __"/user?search=searchme&page=32&size=21"__; the above template renders to : 
- ```json
+```json
 {
     "search": "searchme",
     "page": "32",
@@ -109,12 +111,12 @@ mirage.post("/user").sendFile("../sample/create.json");
 ```
 and __create.json__ is : 
 ```json
- {
-  "body": {
-    "id"      :"1",
-    "name"    : "{{request.body.name}}",
-    "address" : {
-      "street" : "{{request.body.address.street}}"
+{
+"body": {
+  "id"      :"1",
+  "name"    : "{{request.body.name}}",
+  "address" : {
+    "street" : "{{request.body.address.street}}"
     }
   }
 }
