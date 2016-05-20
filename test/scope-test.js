@@ -1,5 +1,5 @@
 var expect  = require('chai').expect,
-    scope  = require("../src/scope");
+    scope  = require("../src/scope").create();
 
 describe('Execute JS', function() {
   it('should inject fields with primary values to context', function () {
