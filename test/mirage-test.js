@@ -53,4 +53,22 @@ describe('Mirage', function() {
           done();
         });
   });
+
+  it('should add url params to template scope', function (done) {
+    var app     = mirage.start();
+
+    mirage.get("/user").sendFile("sample/request-url-param.json");
+
+    request(app)
+        .get("/user"+encodeURI("?search=who wat that&page=1&size=10"))
+        .expect("Content-Type", /json/)
+        .expect(200)
+        .end(function(err, res) {
+          expect(res.body.search).to.equal("who wat that");
+          expect(res.body.page).to.equal("1");
+          expect(res.body.size).to.equal("10");
+          done();
+        });
+  });
+
 });

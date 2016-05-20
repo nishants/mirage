@@ -6,7 +6,7 @@ var readFile = function (path) {
       return JSON.parse(fs.readFileSync(path));
     },
     parseRequest = function(req){
-      return {body: req.body, params: req.params};
+      return {body: req.body, path: req.params, query: req.query};
     },
     sendFile = function (path) {
       return {
