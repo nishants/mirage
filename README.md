@@ -28,8 +28,8 @@ This is a framework for quickly setting up a RESTful service for serving json re
 ```
 You can find the sample json templates in sample/ directory.
 
-### Using expression in JSO-NG
-hello.json
+##### Using expressions in JSO-NG
+You can exectute a JS snippet before serving a json, and do it conviniently in your json.
  ```javascript
 {
   "body": {
@@ -39,13 +39,26 @@ hello.json
 }
 ```
 
-#### Above renders to following json : 
+###### Above renders to following json : 
  ```json
  {
     "message": "hello",
     "id": "1"
 }
  ```
-
-
-
+##### Using request path parameters
+ ```javascript
+{
+  "body": {
+    "id"      :"{{request.path.id}}",
+    "name"    : "someone"
+  }
+}
+```
+If the request is made to url "user/", above template renders to : 
+ ```json
+ {
+    "id": "212",
+    "name": "someone"
+}
+```
