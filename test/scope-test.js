@@ -29,6 +29,7 @@ describe('Execute JS', function() {
         scope       = scopes.create({data: {id: 1, address: {street: "my-home"}}});
     expect(scope.execute(expression)).to.equal("1-my-home");
   });
+
   it('should allow calling function on injectables', function () {
     var scope       = scopes.create({callMe: function(){return "called-me";}, child: {callMeToo: function(){return "called-me-too";}}}),
         expression  = 'callMe() + "-" + child.callMeToo()';
