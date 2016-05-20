@@ -7,15 +7,14 @@ module.exports = {
       },
       inject: function(definition){
         var target = definition.splice(definition.length-1)[0],
-            args = [],
-            injectables = this._injectables;
-
-        definition.forEach(function(name, index){
-          args[index] = injectables[name];
-        });
+            self = this;
 
         return {
           call: function(){
+            var args = [];
+            definition.forEach(function(name, index){
+              args[index] = self._injectables[name];
+            });
             target.apply({}, args);
           }
         };
