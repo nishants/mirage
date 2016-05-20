@@ -9,16 +9,14 @@ var expect  = require('chai').expect,
       };
     };
 
-describe('Execute JS', function() {
+describe('Parse JSO-NG', function() {
 
-  it('should inject fields with primary values to context', function () {
+  it('should find, execute and replace expressions by there values', function () {
     var scope       = fakeScope({"id" : "some-id"}),
-        template = {
-          id: "my-{{id}}"
-        },
-        result = parser.parse(scope, template);
+        template = {id: "my-{{id}}"},
+        parsed   = parser.parse(scope, template);
 
-    expect(result.id).to.equal("my-some-id");
-
+    expect(parsed.id).to.equal("my-some-id");
   });
+
 });
