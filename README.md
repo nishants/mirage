@@ -2,14 +2,14 @@
 
 This is a framework for quickly setting up a RESTful service for serving json responses in context of incoming requests.
 
- It has two main features:
-   1. Defining a webserver purely on basis of request/response contract.
-   2. Using json templates just like our forefathers did with html (in the days of server side html rendering).
+It has two main features:
+1. Defining a webserver purely on basis of request/response contract.
+2. Using json templates just like our forefathers did with html (in the days of      server side html rendering).
 
- ### JSO-NG
-   JSO-NG is a templating language for serving json content.
-   It is inspired by the notion of html templates (mocha, angular).
-   It extends the notion of compiling html templates (driven by in memory objects) to json.
+### JSO-NG
+  JSO-NG is a templating language for serving json content.
+  It is inspired by the notion of html templates (mocha, angular).
+  It extends the notion of compiling html templates (driven by in memory objects) to json.
 
  So what can you do with this ?
  You can use this to quickly setup a web-server that can stub a RESTful json based remote server.
@@ -29,7 +29,7 @@ This is a framework for quickly setting up a RESTful service for serving json re
 You can find the sample json templates in sample/ directory.
 
  ### Using expressions in JSO-NG
-You can exectute a JS snippet before serving a json, and do it conviniently in your json.
+Given a hello.json is : 
  ```javascript
 {
   "body": {
@@ -38,8 +38,12 @@ You can exectute a JS snippet before serving a json, and do it conviniently in y
   }
 }
 ```
+And following url mapping is declared 
+ ```javascript
+ mirage.post("/user").sendFile("../sample/hello.json")
+```
 
-Above temlpate renders to following json : 
+Then making a GET request to '/user' results in : 
  ```json
  {
     "message": "hello",
