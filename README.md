@@ -130,6 +130,7 @@ And we make a __POST__ request is made to url __"/user"__ with below body :
 ```
 
 Then we get following reponse : 
+```json
 {
     "id": "1",
     "name": "Me",
@@ -137,3 +138,4 @@ Then we get following reponse :
         "street": "MyPlace"
     }
 }
+```
