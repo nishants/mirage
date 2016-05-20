@@ -23,9 +23,9 @@ describe('Execute JS', function() {
 
   it('should inject object fields', function () {
     var scope      = {data: {id: 1, address: {street: "my-home"}}},
-        expression = 'data.address.street';
+        expression = 'data.id + "-" + data.address.street';
 
-    expect(execute.execute(scope, expression)).to.equal("my-home");
+    expect(execute.execute(scope, expression)).to.equal("1-my-home");
   });
 
 });
