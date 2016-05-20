@@ -1,17 +1,21 @@
 module.exports = {
-  _services : {},
+  _injectables : {},
   add : function(name, service){
-    return this._services[name] = service;
+    return this._injectables[name] = service;
   },
   inject: function(definition){
     var target = definition.splice(definition.length-1)[0],
         args = [],
-        services = this._services;
+        injectables = this._injectables;
 
     definition.forEach(function(name, index){
-      args[index] = services[name];
+      args[index] = injectables[name];
     });
 
-    target.apply({}, args);
+    return {
+      call: function(){
+        target.apply({}, args);
+      }
+    };
   }
 };

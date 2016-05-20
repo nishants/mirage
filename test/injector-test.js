@@ -15,6 +15,7 @@ describe('Injector Test', function() {
     injector.add("serviceOne", serviceOne);
     injector.add("serviceTwo", serviceTwo);
 
-    injector.inject(["serviceOne", "serviceTwo", target]);
+    var injected = injector.inject(["serviceOne", "serviceTwo", target])
+    injected.call();
   });
 });
