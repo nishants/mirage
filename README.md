@@ -28,7 +28,7 @@ This is a framework for quickly setting up a RESTful service for serving json re
 ```
 You can find the sample json templates in sample/ directory.
 
-##### Using expressions in JSO-NG
+ ### Using expressions in JSO-NG
 You can exectute a JS snippet before serving a json, and do it conviniently in your json.
  ```javascript
 {
@@ -39,14 +39,19 @@ You can exectute a JS snippet before serving a json, and do it conviniently in y
 }
 ```
 
-###### Above renders to following json : 
+Above temlpate renders to following json : 
  ```json
  {
     "message": "hello",
     "id": "1"
 }
  ```
-##### Using request path parameters
+### Using request path parameters
+Given we declare following url :
+ ```javascript
+ mirage.get("/user/:id").sendFile("../sample/request-path-param.json");
+```
+ and request-path-param.json is : 
  ```javascript
 {
   "body": {
@@ -55,10 +60,10 @@ You can exectute a JS snippet before serving a json, and do it conviniently in y
   }
 }
 ```
-If the request is made to url "user/", above template renders to : 
+Then if a request is made to url "user/101", above template renders to : 
  ```json
  {
-    "id": "212",
+    "id": "101",
     "name": "someone"
 }
 ```
