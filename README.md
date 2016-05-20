@@ -21,20 +21,20 @@ You can use this to quickly setup a web-server that can stub a RESTful json base
 ## A sample script :
 
 ```javascript
- var mirage     = require("./mirage").create();
- mirage.post("/user").sendFile("../sample/create.json");
- mirage.get("/user/:id").sendFile("../sample/request-path-param.json");
- mirage.get("/user").sendFile("../sample/request-url-param.json");
+var mirage     = require("./mirage").create();
+mirage.post("/user").sendFile("../sample/create.json");
+mirage.get("/user/:id").sendFile("../sample/request-path-param.json");
+mirage.get("/user").sendFile("../sample/request-url-param.json");
 
- mirage.app.listen(3000, function () {
-   console.log('Example app listening on port 3000!');
- });
+mirage.app.listen(3000, function () {
+ console.log('Example app listening on port 3000!');
+});
 ```
 
 ## Using expressions in JSO-NG
 
-Given a hello.json is : 
- ```javascript
+Given a __hello.json__ is : 
+```javascript
 {
   "body": {
     "message": "hello",
@@ -43,11 +43,11 @@ Given a hello.json is :
 }
 ```
 And following url mapping is declared 
- ```javascript
- mirage.post("/user").sendFile("../sample/hello.json")
+```javascript
+mirage.post("/user").sendFile("../sample/hello.json")
 ```
 
-Then making a GET request to '/user' results in : 
+Then making a __GET__ request to __'/user'__ results in : 
  ```json
  {
     "message": "hello",
@@ -59,7 +59,7 @@ Given we declare following url :
  ```javascript
  mirage.get("/user/:id").sendFile("../sample/request-path-param.json");
 ```
- and request-path-param.json is : 
+ and __request-path-param.json__ is : 
  ```javascript
 {
   "body": {
