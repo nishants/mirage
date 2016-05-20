@@ -32,6 +32,33 @@ describe('Injector Test', function() {
     injected.call();
   });
 
+  it('Should support interdependent services', function(done) {
+    var serviceOne = [function () {
+          return {
+            fromOne : function(){
+              return "from-one";
+            }
+          };
+        }],
+        serviceTwo = ["serviceOne", function(one){
+          return {
+            call: function(){
+              return "service-two-" + one.fromOne();
+            }
+          };
+        }];
+
+    injector.add("serviceOne", serviceOne);
+    injector.add("serviceTwo", serviceTwo);
+    injector.init();
+
+    var injected = injector.inject(["serviceOne", "serviceTwo", function(one, two){
+      expect(two.call()).to.equal("service-two-from-one");
+      done();
+    }]);
+    injected.call();
+  });
+
   it('Should allow cyclic dependencies', function(done) {
 
     var oneInitialized = false,
