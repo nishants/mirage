@@ -9,12 +9,12 @@ var readFile = function (path) {
       return {
         path: path,
         send: function (req, res) {
-          var scope       = scopes.create({}),
+          var scope       = scopes.create({request: {body: req.body}}),
               template    = readFile(this.path),
               parsed      = parser.parse(scope, template),
-              resonseBody = parsed.body;
+              responseBody= parsed.body;
 
-          return res.status(200).json(resonseBody);
+          return res.status(200).json(responseBody);
         }
       };
     };

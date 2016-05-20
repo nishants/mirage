@@ -21,4 +21,23 @@ describe('Mirage', function() {
           done();
         });
   });
+
+  it('should add request body in template scope', function (done) {
+    var app     = mirage.start();
+
+    //mirage.filesFrom("../sample");
+    mirage.post("/user").sendFile("sample/create.json");
+
+    request(app)
+        .post("/user", {name: "My User", address: {street: "My Home"}})
+        .send({name: "My User", address: {street: "My Home"}})
+        .expect("Content-Type", /json/)
+        .expect(200)
+        .end(function(err, res) {
+          expect(res.body.id).to.equal("1");
+          expect(res.body.name).to.equal("My User");
+          expect(res.body.address.street).to.equal("My Home");
+          done();
+        });
+  });
 });
