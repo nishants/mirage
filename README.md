@@ -8,16 +8,17 @@ It has two main features:
 
 2. Using json templates just like our forefathers did with html (in the days of      server side html rendering).
 
-### JSO-NG
+## JSO-NG
 
   JSO-NG is a templating language for serving json content.
   It is inspired by the notion of html templates (mocha, angular).
   It extends the notion of compiling html templates (driven by in memory objects) to json.
 
- So what can you do with this ?
- You can use this to quickly setup a web-server that can stub a RESTful json based remote server.
+## So what can you do with this ?
 
-### A sample script :
+You can use this to quickly setup a web-server that can stub a RESTful json based remote server.
+
+## A sample script :
 
 ```javascript
  var mirage     = require("./mirage").create();
@@ -31,7 +32,7 @@ It has two main features:
 ```
 You can find the sample json templates in sample/ directory.
 
-### Using expressions in JSO-NG
+## Using expressions in JSO-NG
 
 Given a hello.json is : 
  ```javascript
@@ -54,7 +55,7 @@ Then making a GET request to '/user' results in :
     "id": "1"
 }
  ```
-### Using request path parameters
+## Using request path parameters
 Given we declare following url :
  ```javascript
  mirage.get("/user/:id").sendFile("../sample/request-path-param.json");
@@ -75,7 +76,7 @@ Then if a request is made to url "user/101", above template renders to :
     "name": "someone"
 }
 ```
-### Using request url params in response : 
+## Using request url params in response : 
 Given we declare following url :
 
  ```javascript
