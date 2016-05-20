@@ -1,7 +1,11 @@
 var expect  = require('chai').expect,
-    injector  = require("../src/injector");
+    injector;
 
 describe('Injector Test', function() {
+  beforeEach(function(){
+    injector  = require("../src/injector").create();
+  });
+
   it('Should Inject Dependencies', function(done) {
     var serviceOne   = {name: "service-one"},
         serviceTwo   = {call: function(){return "service-two";}},
