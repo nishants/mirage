@@ -8,7 +8,6 @@ describe('Mirage', function() {
   it('should parse expressions in response and add request to scope', function (done) {
     var app     = mirage.start();
 
-    //mirage.filesFrom("../sample");
     mirage.get("/user").sendFile("sample/hello.json");
 
     request(app)
@@ -25,7 +24,6 @@ describe('Mirage', function() {
   it('should add request body in template scope', function (done) {
     var app     = mirage.start();
 
-    //mirage.filesFrom("../sample");
     mirage.post("/user").sendFile("sample/create.json");
 
     request(app)
