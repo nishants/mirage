@@ -2,8 +2,6 @@
   "body": {
     "id"      :"1",
     "name"    : "{{request.body.name}}",
-    "address" : {
-      "street" : "{{request.body.address.street}}"
-    }
+    "address" : {"street" : "{{request.body.address.street}}"}
   }
 }
