@@ -1,4 +1,7 @@
 {
+  "headers" : {
+    "My-Header" : "Hello World!"
+  },
   "body": {
     "message": "hello",
     "id": "{{0 + 1 }}"

@@ -9,9 +9,12 @@ var sendFile = function (path) {
           var scope       = scopes.create({request: {body: req.body, path: req.params, query: req.query}}),
               template    = JSON.parse(fs.readFileSync(this.path)),
               parsed      = compiler.compile(scope, template),
-              responseHead= parsed.head,
+              headers     = parsed.headers,
               responseBody= parsed.body;
 
+          for(var header in headers){
+            res.set(header, headers[header]);
+          }
           return res.status(200).json(responseBody);
         }
       };
