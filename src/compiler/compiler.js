@@ -4,7 +4,7 @@ module.exports = {
   compile: function (scope, template) {
     var result = {};
     for (var node in template) {
-      result[node] = linker.link(scope, node,  template[node]);
+      result[node] = linker.link(scope, template[node]);
     }
     return result;
   }

@@ -1,12 +1,12 @@
 module.exports = {
-  link: link = function(scope, node, nodeValue){
-    var isString        = (typeof nodeValue == "string"),
-        isSubtree       = (typeof nodeValue == "object"),
-        hasExpressions  = isString ? nodeValue.indexOf("{{") != -1 : false,
-        expression      = hasExpressions ? nodeValue.split("{{")[1].split("}}")[0] : null,
+  link: link = function(scope, element){
+    var isString        = (typeof element == "string"),
+        isSubtree       = (typeof element == "object"),
+        hasExpressions  = isString ? element.indexOf("{{") != -1 : false,
+        expression      = hasExpressions ? element.split("{{")[1].split("}}")[0] : null,
         expressionValue = expression ? scope.execute(expression) : null,
-        parsed          = expressionValue ? nodeValue.replace("{{"+expression+"}}", expressionValue) : nodeValue;
+        parsed          = expressionValue ? element.replace("{{"+expression+"}}", expressionValue) : element;
 
-    return parsed = isSubtree ? require("./compiler").compile(scope, nodeValue) : parsed;
+    return parsed = isSubtree ? require("./compiler").compile(scope, element) : parsed;
   }
 };
