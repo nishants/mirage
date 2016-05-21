@@ -27,7 +27,7 @@ describe('Mirage', function() {
     mirage.post("/user").sendFile("sample/create.json");
 
     request(mirage.app)
-        .post("/user", {name: "My User", address: {street: "My Home"}})
+        .post("/user")
         .send({name: "My User", address: {street: "My Home"}})
         .expect("Content-Type", /json/)
         .expect(200)
