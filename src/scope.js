@@ -9,13 +9,16 @@ var execute = function (scope, expression) {
   return scope.execute();
 };
 
+var Scope = function(scope){
+  this.$scope = scope;
+};
+
+Scope.prototype.execute = function(expression){
+  return execute(this.$scope, expression);
+};
+
 module.exports = {
   create : function(scope){
-    return {
-      $scope: scope,
-      execute: function(expression){
-        return execute(this.$scope, expression);
-      }
-    };
+    return new Scope(scope);
   }
 };
