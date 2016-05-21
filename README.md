@@ -1,6 +1,6 @@
 # Mirage
 
-This is a framework for quickly stubbing a RESTful service and serving responses by incoming requests.
+This is a framework for quickly stubbing a RESTful service.
 
 It has two main features:
 
@@ -10,9 +10,9 @@ It has two main features:
 
 ## JSO-NG
 
-  JSO-NG is a templating language for serving json content.
-  It is inspired by the notion of html templates (mocha, angular).
-  It extends the notion of compiling html templates (driven by in memory objects) to json.
+JSO-NG is a templating language for serving json content.
+It is inspired by the notion of html templates (mocha, angular).
+It extends the notion of compiling html templates (driven by in memory objects) to json.
 
 ## So what can you do with this ?
 
