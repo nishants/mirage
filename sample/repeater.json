@@ -1,12 +1,11 @@
 {
   "body": {
-    "id"      :"1",
+    "id"      : "1",
     "name"    : "{{request.body.name}}",
-
     "items"   : [{
         "@repeat" : "item in request.body.items",
-        "name" : "{{item.name}}",
-        "label" : "{{item.label}}"
+        "name"    : "{{item.name}}",
+        "label"   : "{{item.label}}"
       }]
   }
 }
