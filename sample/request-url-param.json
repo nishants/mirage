@@ -1,6 +1,6 @@
 {
   "body": {
-    "search" :"{{request.query.search}}",
+    "search" : "{{request.query.search}}",
     "page"   : "{{request.query.page}}",
     "size"   : "{{request.query.size}}"
   }
