@@ -1,14 +1,24 @@
-function directivesOn(element) {
-  var directives =[];
-  for(var child in element){
-    child.startsWith("@") ? directives.push(element[child]) && (delete element[child]) :"";
-  }
-  return {
-    list: directives,
-    link: function(scope, element){
-      return require("./compiler").compile(scope, element);
+var allDirectives = {
+      "@repeat": {
+        scope: true,
+        link: function(scope, element){
+          require("./compiler").compile(scope, element);
+        }
+      }
+    },
+    directivesOn = function (element) {
+    var directives =[];
+    for(var child in element){
+      child.startsWith("@") ? directives.push({
+        directive: allDirectives[child],
+      }) && (delete element[child]) :"";
     }
-  };
+    return {
+      list: directives,
+      link: function(scope, element){
+        return directives.length ? directives[0].link(scope, element) : require("./compiler").compile(scope, element);
+      }
+    };
 };
 
 module.exports = {
