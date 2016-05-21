@@ -16,6 +16,18 @@ var Scope = function(scope){
 Scope.prototype.execute = function(expression){
   return execute(this.$scope, expression);
 };
+Scope.prototype.createChild = function(param){
+  var child = {},
+      field;
+
+  for(field in param){
+    child[field] = param[field];
+  }
+  for(field in this.$scope){
+    child[field] = this.$scope[field];
+  }
+  return new Scope(child);
+};
 
 module.exports = {
   create : function(scope){

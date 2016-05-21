@@ -45,4 +45,19 @@ describe('Execute JS', function() {
 
     expect(scope.execute(expression)).to.equal("called-me-called-me-too");
   });
+
+  it('should create child scopes', function () {
+    var scope = scopes.create({
+          name: "outer",
+          foo: function(){return "foo"},
+        }),
+        childScope = scope.createChild({
+          bar: function(){
+            return "bar";
+          }
+        }),
+        expression = '{{name + "-" + foo()}}';
+
+    expect(childScope.execute(expression)).to.equal("outer-foo");
+  });
 });
