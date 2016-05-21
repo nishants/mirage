@@ -1,6 +1,6 @@
 var expect  = require('chai').expect,
     scopes  = require("../src/scope"),
-    parser  = require("../src/parser"),
+    parser  = require("../src/compiler/parser"),
     fakeScope = function(expressions){
       return {
         execute: function(expression){

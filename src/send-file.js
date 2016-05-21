@@ -1,6 +1,6 @@
 var fs = require("fs"),
     scopes  = require("./scope"),
-    parser  = require("./parser");
+    parser  = require("./compiler/parser");
 
 var readFile = function (path) {
       return JSON.parse(fs.readFileSync(path));
