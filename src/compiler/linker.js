@@ -7,6 +7,6 @@ module.exports = {
         expressionValue = expression ? scope.execute(expression) : null,
         parsed          = expressionValue ? nodeValue.replace("{{"+expression+"}}", expressionValue) : nodeValue;
 
-    return parsed = isSubtree ? require("./parser").parse(scope, nodeValue) : parsed;
+    return parsed = isSubtree ? require("./compiler").compile(scope, nodeValue) : parsed;
   }
 };
