@@ -1,5 +1,5 @@
-var fs = require("fs"),
-    scopes  = require("./scope"),
+var fs        = require("fs"),
+    scopes    = require("./scope"),
     compiler  = require("./compiler/compiler");
 
 var sendFile = function (path) {
@@ -9,6 +9,7 @@ var sendFile = function (path) {
           var scope       = scopes.create({request: {body: req.body, path: req.params, query: req.query}}),
               template    = JSON.parse(fs.readFileSync(this.path)),
               parsed      = compiler.compile(scope, template),
+              responseHead= parsed.head,
               responseBody= parsed.body;
 
           return res.status(200).json(responseBody);
