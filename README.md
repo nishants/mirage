@@ -11,12 +11,12 @@ It has two main features:
 ## JSO-NG
 
 JSO-NG is a templating language for serving json content.
-It is inspired by the notion of html templates (mocha, angular).
+It is inspired by the notion of html templates (handlebar, angular etc).
 It extends the notion of compiling html templates (driven by in memory objects) to json.
 
 ## So what can you do with this ?
 
-You can use this to quickly setup a web-server that can stub a RESTful json based remote server.
+You can use this to quickly setup a web-server that can stub a RESTful  remote server.
 
 ## A sample script :
 
