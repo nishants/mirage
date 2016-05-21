@@ -1,7 +1,7 @@
 {
-  "name": "nvm",
-  "version": "1.0.0",
-  "description": "Stub REST servers with plain old javascript objects.",
+  "name": "mirage",
+  "version": "0.0",
+  "description": "Stub REST servers with json temlpates.",
   "main": "mirage.js",
   "directories": {
     "test": "test"
