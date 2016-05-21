@@ -1,18 +1,13 @@
 # Mirage
 
-This is a framework for quickly stubbing a RESTful service.
-
-It has two main features:
-
-1. Defining a webserver purely on basis of request/response json contracts.
-
-2. Json templates.
+ - This is a framework for quickly stubbing a RESTful service. 
+ - Defining a webserver purely on basis of request/response json contracts. 
+ - Parsing JSON templates, based on request body/path/query params.
 
 ## JSO-NG
 
-JSO-NG is a templating language for serving json content.
-It is inspired by the notion of html templates (handlebar, angular etc).
-It extends the notion of compiling html templates (driven by in memory objects) to json.
+ - JSO-NG is a templating language for serving json content. \
+ - It extends the notion of compiling html templates to json.
 
 ## So what can you do with this ?
 
@@ -69,7 +64,7 @@ and __request-path-param.json__ is :
   }
 }
 ```
-Then if a request is made to url "user/101", above template renders to : 
+Then if a request is made to url **"user/101"**, above template renders to : 
 ```json
 {
   "id": "101",
@@ -141,3 +136,15 @@ Then we get following reponse :
     }
 }
 ```
+
+**Coming up...**
+
+ - ***controllers*** for templates (injected js module that runs with request param, just before rendering the json template)
+ - ***directives*** for templates (links templates and scope variable at runtime)
+ - ***repeater*** directive to transform data to rows of values,
+ - directive for ***boolean and number types***
+ - directive to ***extend and override JSON***.
+ - support response headers
+ - support **response status** (200, 201, 404..)
+ - support for **cookies**
+
