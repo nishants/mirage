@@ -18,10 +18,8 @@ module.exports = {
         hasExpressions  = isString ? element.indexOf("{{") != -1 : false,
         expression      = hasExpressions ? element.split("{{")[1].split("}}")[0] : null,
         expressionValue = expression ? scope.execute(expression) : null,
-        directives      = directivesOn(element),
-        hasDirectives   = directives.list.length > 0,
         parsed          = expressionValue ? element.replace("{{"+expression+"}}", expressionValue) : element;
 
-    return parsed = isSubtree ? directives.link(scope, element) : parsed;
+    return parsed = isSubtree ? directivesOn(element).link(scope, element) : parsed;
   }
 };
