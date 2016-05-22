@@ -1,4 +1,4 @@
-var scopes    = require("./scope"),
+var scopes    = require("./compiler/scope"),
     Controller = function(_ctrl){
       this._ctrl = _ctrl;
     };

@@ -1,7 +1,7 @@
 var express     = require('express'),
     mappings    = require('./url-mapping'),
     bodyParser  = require('body-parser'),
-    scopes      = require('../src/scope'),
+    scopes      = require('../src/compiler/scope'),
     compiler    = require('../src/compiler/compiler'),
     directives  = require("../src/compiler/directives");
 
