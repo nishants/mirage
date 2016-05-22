@@ -6,9 +6,9 @@ var execute = function (scope, expression) {
     contextScript += ("var <field> = this.<field>;".replace("<field>", field).replace("<field>", field));
   }
   scope.execute = function () {
-    expression = expression.replace(new RegExp("\'", 'g'), "\\'");
+    var escapeExpression = expression.replace(new RegExp("\'", 'g'), "\\'");
     try {
-      return eval(contextScript + "eval('<expression>');".replace("<expression>", expression));
+      return eval(contextScript + "eval('<expression>');".replace("<expression>", escapeExpression));
     }catch(err){
       return error.create({scope: this, expression: expression, error: err}).message;
     }
