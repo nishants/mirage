@@ -10,8 +10,8 @@ module.exports = {
           isDirective = node.startsWith("@");
 
       result[node] = isDirective ? directives.search(value).link(scope, value)
-                                 : linker.link(scope, template[node]);
-      
+                                 : isSubtree ? this.compile(scope, value) : linker.link(scope, template[node]);
+
     }
     return result;
   }
