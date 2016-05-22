@@ -72,5 +72,25 @@ describe('Directive Definitions', function() {
     expect(result.data.fooTarget.fooTarget.child).to.equal("foodified");
   });
 
+  it('should allow executing expressoin in directive', function () {
+    var scope    = scopes.create({param: "replaced by expression"}),
+        template = {
+          "data" : {
+            "fooTarget" : {
+              "@foo" : "foo-param",
+            }
+          }
+        },
+        result ;
+
+    directives.add("@foo", {
+      link: function(scope){
+        return scope.execute("param");
+      }
+    });
+
+    result = compiler.compile(scope, template);
+    expect(result.data.fooTarget).to.equal("replaced by expression");
+  });
 
 });
