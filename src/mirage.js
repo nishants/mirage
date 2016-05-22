@@ -1,6 +1,7 @@
 var express     = require('express'),
     mappings    = require('./url-mapping'),
     bodyParser  = require('body-parser'),
+    scopes      = require('../src/scope'),
     compiler    = require('../src/compiler/compiler'),
     directives  = require("../src/compiler/directives");
 
@@ -24,5 +25,8 @@ module.exports  = {
         return directives.add(name, definition);
       }
     };
+  },
+  compile: function(scope , template){
+    return compiler.compile(scopes.create(scope) , template);
   }
 }
