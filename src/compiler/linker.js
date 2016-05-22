@@ -3,8 +3,11 @@ module.exports = {
     var isString        = (typeof element == "string"),
         hasExpressions  = isString ? element.indexOf("{{") != -1 : false,
         expression      = hasExpressions ? element.split("{{")[1].split("}}")[0] : null,
-        expressionValue = expression ? scope.execute(expression) : null;
+        expressionValue = expression ? scope.execute(expression) : null,
+        replace         = expression && (element.length > ("{{}}" + expression).length);
 
-    return expressionValue ? element.replace("{{"+expression+"}}", expressionValue) : element;
+    expressionValue = replace ?  element.replace("{{"+expression+"}}", expressionValue) : expressionValue;
+
+    return expressionValue ? expressionValue : element;
   }
 };

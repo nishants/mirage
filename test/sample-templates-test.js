@@ -15,7 +15,7 @@ describe('Mirage', function() {
         .expect(200)
         .end(function(err, res) {
           expect(res.body.message).to.equal("hello");
-          expect(res.body.id).to.equal("1");
+          expect(res.body.id).to.equal(1);
           done();
         });
   });
