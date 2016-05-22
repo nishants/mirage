@@ -1,6 +1,6 @@
-var express = require('express'),
-    mappings = require('./url-mapping'),
-    bodyParser = require('body-parser');
+var express     = require('express'),
+    mappings    = require('./url-mapping'),
+    bodyParser  = require('body-parser');
 
 module.exports  = {
   create: function(){
