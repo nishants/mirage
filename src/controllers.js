@@ -1,18 +1,15 @@
-var scopes    = require("./scope");
+var scopes    = require("./scope"),
+    Controller = function(){};
+
+Controller.prototype.service= function(req, res, action){
+  action.send(req, res, scopes.create({request: {body: req.body, path: req.params, query: req.query}}));
+}
 
 module.exports  = {
   create: function(controller){
-    return {
-      service: function(req, res, action){
-        action.send(req, res, scopes.create({request: {body: req.body, path: req.params, query: req.query}}));
-      }
-    };
+    return new Controller();
   },
   none : function(){
-    return {
-      service: function(req, res, action){
-        action.send(req, res, scopes.create({request: {body: req.body, path: req.params, query: req.query}}));
-      }
-    };
+    return new Controller();
   }
 }
