@@ -93,7 +93,7 @@ describe('Directive Definitions', function() {
     expect(result.data.fooTarget).to.equal("replaced by expression");
   });
 
-  it('should allow compiling template from directive', function () {
+  it('should allow directives in template returned from directive', function () {
     var scope    = scopes.create({param: "found"}),
         template = {
           "data" : {
@@ -106,12 +106,23 @@ describe('Directive Definitions', function() {
 
     directives.add("@foo", {
       link: function(scope, body, param, compile){
-        return compile(scope, {child: "{{param}}"});
+        return compile(scope, {
+          child: "{{param}}",
+          "@bar": "bar-param",
+        });
+      }
+    });
+
+    directives.add("@bar", {
+      link: function(scope, body, param){
+        body.otherChild = "bar";
+        expect(param).to.equal("bar-param");
       }
     });
 
     result = compiler.compile(scope, template);
     expect(result.data.fooTarget.child).to.equal("found");
+    expect(result.data.fooTarget.otherChild).to.equal("bar");
   });
 
 });
