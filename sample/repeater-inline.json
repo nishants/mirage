@@ -2,7 +2,7 @@
   "body": {
     "id"    : "1",
     "name"  : "{{request.body.name}}",
-    "count": {
+    "list": {
       "@repeat" : "item in [{name: 1},{name: 2},{name: 3}]",
       "name"    : "{{request.body.name + item.name + '' }}"
     }
