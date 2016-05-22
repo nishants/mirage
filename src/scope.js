@@ -21,11 +21,11 @@ Scope.prototype.createChild = function(param){
   var child = {},
       field;
 
-  for(field in param){
-    child[field] = param[field];
-  }
   for(field in this.$scope){
     child[field] = this.$scope[field];
+  }
+  for(field in param){
+    child[field] = param[field];
   }
   return new Scope(child);
 };
