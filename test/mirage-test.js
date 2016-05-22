@@ -108,12 +108,12 @@ describe('Mirage', function() {
 
   it('should support returning data from controller', function (done) {
     var mirage     = Mirage.create(),
-        myController = [function (scope) {
+        myController = function (scope) {
           scope.response = {
             message: "Successfully created item!.",
             items: [{name: "controllified-one"}, {name: "controllified-two"}],
           };
-        }];
+        };
 
     mirage.post("/controller")
           .sendFile("sample/hello-controller.json")
