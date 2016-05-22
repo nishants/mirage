@@ -36,7 +36,7 @@ module.exports = {
     return {
       list: found,
       link: function(scope, element){
-        return this.list.length ? this.list[0].directive.link(scope, element, this.list[0].param) : require("./compiler").compile(scope, element);
+        return this.list.length ? this.list[0].directive.link(scope, element, this.list[0].param) : function(){};
       }
     };
   }};

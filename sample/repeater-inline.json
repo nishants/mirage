@@ -4,7 +4,11 @@
     "name"  : "{{request.body.name}}",
     "list": {
       "@repeat" : "item in [{name: 1},{name: 2},{name: 3}]",
-      "name"    : "{{request.body.name + item.name + '' }}"
+      "name"    : "{{request.body.name + item.name + '' }}",
+      "inside": {
+        "@repeat" : "item in [{name: 11},{name: 22},{name: 33}]",
+        "name"    : "{{request.body.name + item.name + '' }}"
+      }
     }
   }
 }

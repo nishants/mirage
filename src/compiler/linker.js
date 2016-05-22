@@ -1,6 +1,5 @@
 var directives = require("./directives");
 
-
 module.exports = {
   link: link = function(scope, element){
     var isString        = (typeof element == "string"),
@@ -10,6 +9,6 @@ module.exports = {
         expressionValue = expression ? scope.execute(expression) : null,
         parsed          = expressionValue ? element.replace("{{"+expression+"}}", expressionValue) : element;
 
-    return isSubtree ? directives.search(element).link(scope, element) : parsed;
+    return isSubtree ? require("./compiler").compile(scope, element) : parsed;
   }
 };
