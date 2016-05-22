@@ -29,7 +29,7 @@ module.exports = {
     all[name] = {
       scope: false,
       link : definition.link
-    };;
+    };
   },
   link: function(scope, template){
     var directives = [];
