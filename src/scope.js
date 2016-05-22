@@ -1,3 +1,5 @@
+var error = require("./scope-error");
+
 var execute = function (scope, expression) {
   var contextScript = "";
   for (var field in scope) {
@@ -5,7 +7,11 @@ var execute = function (scope, expression) {
   }
   scope.execute = function () {
     expression = expression.replace(new RegExp("\'", 'g'), "\\'");
-    return eval(contextScript + "eval('<expression>');".replace("<expression>", expression));
+    try {
+      return eval(contextScript + "eval('<expression>');".replace("<expression>", expression));
+    }catch(err){
+      return error.create({scope: this, expression: expression, error: err}).message;
+    }
   };
   return scope.execute();
 };

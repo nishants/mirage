@@ -74,4 +74,12 @@ describe('Execute JS', function() {
 
     expect(child.execute(expression)).to.equal("child-name");
   });
+
+  it('should return error if expression is invalid', function () {
+    var scope      = scopes.create({name: "parent-name"}),
+        expression = "{{notKnown}}",
+        expectedErrorMessage = 'Invalid Expression : {{notKnown}}, in scope : {"name":"parent-name"}, error: ReferenceError: notKnown is not defined';
+
+    expect(scope.execute(expression)).to.equal(expectedErrorMessage);
+  });
 });
