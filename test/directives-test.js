@@ -1,11 +1,12 @@
-var expect  = require('chai').expect,
-    scopes  = require('../src/scope'),
-    compiler  = require('../src/compiler/compiler'),
-    directives = require("../src/compiler/directives");
+var expect    = require('chai').expect,
+    mirage    = require('../src/mirage'),
+    scopes    = require('../src/scope'),
+    compiler  = require('../src/compiler/compiler');
 
 describe('Directive Definitions', function() {
   it('should replace directory body with parsed result', function () {
     var scope    = scopes.create({id: 1}),
+        app       = mirage.create(),
         template = {
           "data" : {
             "fooTarget" : {
@@ -15,7 +16,7 @@ describe('Directive Definitions', function() {
         },
         result ;
 
-    directives.add("@foo", {
+    app.directive("@foo", {
       link: function(scope, body, param){
         expect(param).to.equal("foo-param");
         return "bar";
@@ -28,6 +29,7 @@ describe('Directive Definitions', function() {
 
   it('should replace directory body with a subtree', function () {
     var scope    = scopes.create({id: 1}),
+        app       = mirage.create(),
         template = {
           "data" : {
             "fooTarget" : {
@@ -37,7 +39,7 @@ describe('Directive Definitions', function() {
         },
         result ;
 
-    directives.add("@foo", {
+    app.directive("@foo", {
       link: function(scope, body, param){
         return {child: "bar"};
       }
@@ -49,6 +51,7 @@ describe('Directive Definitions', function() {
 
   it('should apply nested directives', function () {
     var scope    = scopes.create({id: 1}),
+        app       = mirage.create(),
         template = {
           "data" : {
             "fooTarget" : {
@@ -61,7 +64,7 @@ describe('Directive Definitions', function() {
         },
         result ;
 
-    directives.add("@foo", {
+    app.directive("@foo", {
       link: function(scope, body){
         body.child = "foodified";
       }
@@ -74,6 +77,7 @@ describe('Directive Definitions', function() {
 
   it('should allow executing expressoin in directive', function () {
     var scope    = scopes.create({param: "replaced by expression"}),
+        app       = mirage.create(),
         template = {
           "data" : {
             "fooTarget" : {
@@ -83,7 +87,7 @@ describe('Directive Definitions', function() {
         },
         result ;
 
-    directives.add("@foo", {
+    app.directive("@foo", {
       link: function(scope){
         return scope.execute("param");
       }
@@ -95,6 +99,7 @@ describe('Directive Definitions', function() {
 
   it('should allow directives in template returned from directive', function () {
     var scope    = scopes.create({param: "found"}),
+        app       = mirage.create(),
         template = {
           "data" : {
             "fooTarget" : {
@@ -104,7 +109,7 @@ describe('Directive Definitions', function() {
         },
         result ;
 
-    directives.add("@foo", {
+    app.directive("@foo", {
       link: function(scope, body, param, compile){
         return compile(scope, {
           child: "{{param}}",
@@ -113,7 +118,7 @@ describe('Directive Definitions', function() {
       }
     });
 
-    directives.add("@bar", {
+    app.directive("@bar", {
       link: function(scope, body, param){
         body.otherChild = "bar";
         expect(param).to.equal("bar-param");

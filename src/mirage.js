@@ -1,6 +1,8 @@
 var express     = require('express'),
     mappings    = require('./url-mapping'),
-    bodyParser  = require('body-parser');
+    bodyParser  = require('body-parser'),
+    compiler    = require('../src/compiler/compiler'),
+    directives  = require("../src/compiler/directives");
 
 module.exports  = {
   create: function(){
@@ -17,6 +19,9 @@ module.exports  = {
         var mapping = mappings.create();
         this.app.post(url, mapping.service());
         return mapping;
+      },
+      directive: function(name, definition){
+        return directives.add(name, definition);
       }
     };
   }
