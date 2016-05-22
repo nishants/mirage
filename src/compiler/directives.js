@@ -25,6 +25,12 @@ module.exports = {
   get: function(name){
     return all[name];
   },
+  add: function(name, definition){
+    all[name] = {
+      scope: false,
+      link : definition.link
+    };;
+  },
   link: function(scope, template){
     var directives = [];
     for(var field in template){
