@@ -8,6 +8,6 @@ module.exports = {
 
     expressionValue = replace ?  element.replace("{{"+expression+"}}", expressionValue) : expressionValue;
 
-    return expressionValue ? expressionValue : element;
+    return hasExpressions ? expressionValue : element;
   }
 };

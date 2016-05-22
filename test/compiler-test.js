@@ -11,13 +11,13 @@ describe('Compile jso-ng', function() {
     expect(parsed.id).to.equal("my-some-id");
   });
 
-  it('should support numbers', function () {
-    var scope       = {"id" : 1, "salary" : 200.12},
-        template    = {id: "{{id}}", salary: "{{salary}}"},
+  it('should support numbers and booleans in expression return type', function () {
+    var scope       = {"crazy" : false, sober: true},
+        template    = {crazy: "{{crazy}}", sober: "{{sober}}"},
         parsed      = mirage.compile(scope, template);
 
-    expect(parsed.id).to.equal(1);
-    expect(parsed.salary).to.equal(200.12);
+    expect(parsed.sober).to.equal(true);
+    expect(parsed.crazy).to.equal(false);
   });
 
   it('should parse sub trees', function () {
