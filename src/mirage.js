@@ -10,12 +10,12 @@ module.exports  = {
       app: app,
       get: function(url){
         var mapping = mappings.create();
-        this.app.get(url, mapping.send());
+        this.app.get(url, mapping.service());
         return mapping;
       },
       post: function(url){
         var mapping = mappings.create();
-        this.app.post(url, mapping.send());
+        this.app.post(url, mapping.service());
         return mapping;
       }
     };

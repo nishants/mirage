@@ -1,9 +1,17 @@
 
 module.exports  = {
   create: function(controller){
-    return {};
+    return {
+      service: function(req, res, action){
+        action.send(req, res);
+      }
+    };
   },
   none : function(){
-    return {};
+    return {
+      service: function(req, res, action){
+        action.send(req, res);
+      }
+    };
   }
 }

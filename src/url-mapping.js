@@ -6,11 +6,11 @@ module.exports  = {
     return {
       _action     : null,
       _controller : null,
-      send: function(){
+      service: function(){
         var self = this;
         return function(req, res){
           var controller = self._controller || controllers.none();
-          return self._action.send(req, res);
+          return controller.service(req, res, self._action);
         }
       },
       sendFile: function(path){
