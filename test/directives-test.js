@@ -93,4 +93,25 @@ describe('Directive Definitions', function() {
     expect(result.data.fooTarget).to.equal("replaced by expression");
   });
 
+  it('should allow compiling template from directive', function () {
+    var scope    = scopes.create({param: "found"}),
+        template = {
+          "data" : {
+            "fooTarget" : {
+              "@foo" : "foo-param"
+            }
+          }
+        },
+        result ;
+
+    directives.add("@foo", {
+      link: function(scope, body, param, compile){
+        return compile(scope, {child: "{{param}}"});
+      }
+    });
+
+    result = compiler.compile(scope, template);
+    expect(result.data.fooTarget.child).to.equal("found");
+  });
+
 });

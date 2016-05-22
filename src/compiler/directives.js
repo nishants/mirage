@@ -32,7 +32,10 @@ module.exports = {
     };
   },
   link: function(scope, template){
-    var directives = [];
+    var directives = [],
+        compile = function(scope, template){
+          return require("./compiler").compile(scope, template);
+        };
     for(var field in template){
       field.startsWith("@") && directives.push({
         name: field,
@@ -44,8 +47,8 @@ module.exports = {
           directive = directives[i];
 
       delete template[directives[i].name];
-      var replace = directives[i].directive.link(scope, template, params);
-      template = replace || require("./compiler").compile(scope, template);
+      var replace = directives[i].directive.link(scope, template, params, compile);
+      template = replace || compile(scope, template);
     }
     return template;
   },
