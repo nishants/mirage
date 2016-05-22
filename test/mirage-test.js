@@ -4,6 +4,7 @@ var expect  = require('chai').expect,
     request = require('supertest');
 
 describe('Mirage', function() {
+
   it('should parse expressions in json template', function (done) {
     var mirage     = Mirage.create();
 

@@ -4,6 +4,7 @@ var execute = function (scope, expression) {
     contextScript += ("var <field> = this.<field>;".replace("<field>", field).replace("<field>", field));
   }
   scope.execute = function () {
+    expression = expression.replace(new RegExp("\'", 'g'), "\\'");
     return eval(contextScript + "eval('<expression>');".replace("<expression>", expression));
   };
   return scope.execute();
