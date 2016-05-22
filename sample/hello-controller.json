@@ -1,0 +1,6 @@
+{
+  "@controller" : "createItemController",
+  "body"        : {
+    "message": "{{response.message}}"
+  }
+}

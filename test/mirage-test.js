@@ -106,4 +106,31 @@ describe('Mirage', function() {
         });
   });
 
+  it('should support returning data from controller', function (done) {
+    var mirage     = Mirage.create(),
+        myController = [function (scope) {
+          scope.response = {
+            message: "Successfully created item!.",
+            items: [{name: "controllified-one"}, {name: "controllified-two"}],
+          };
+        }];
+
+    mirage.post("/controller")
+          .sendFile("sample/hello-controller.json")
+          .controller(myController);
+
+    request(mirage.app)
+        .post("/controller")
+        .send({items: [{name: "one"},{name: "two"},{name: "three"}]})
+        .expect("Content-Type", /json/)
+        .expect(201)
+        .end(function(err, res) {
+          var result = res.body.items;
+          expect(res.body.message).to.equal("Successfully created item!.");
+          //expect(result[0].name).to.equal("controllified-one");
+          //expect(result[1].name).to.equal("controllified-two");
+          done();
+        });
+  });
+
 });
