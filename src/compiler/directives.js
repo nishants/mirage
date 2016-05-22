@@ -21,5 +21,8 @@ var all = {
 };
 
 module.exports = {
-  all: all
+  all: all,
+  get: function(name){
+    return all[name];
+  }
 };
