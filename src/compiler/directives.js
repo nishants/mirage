@@ -25,6 +25,12 @@ module.exports = {
   get: function(name){
     return all[name];
   },
+  preLink: function(){
+
+  },
+  postLink: function(){
+
+  },
   on: function (name) {
     return {
       link: function(scope, element, param){

@@ -7,10 +7,21 @@ module.exports = {
     for (var node in template) {
       var value       = template[node],
           isSubtree   = (typeof value == "object"),
-          isDirective = node.startsWith("@");
+          hasDirective= function(){
+            for(var field in template[node]){
+              if(node.startsWith("@")) return true;
+            }
+            return false;
+          };
 
-      result[node] = isDirective ? directives.on(node).link(scope, template, value)
-                                 : isSubtree ? this.compile(scope, value)
+      if(hasDirective()) {
+        var target = template[node],
+            pipe = directives.preLink(scope, target);
+        pipe = this.compile(scope, pipe);
+        pipe = directives.postLink(scope, pipe);
+      }
+      result[node] = hasDirective() ? pipe
+                                    : isSubtree ? this.compile(scope, value)
                                              : linker.link(scope, value);
     }
     return result;
