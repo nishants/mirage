@@ -87,7 +87,7 @@ describe('Mirage', function() {
 
   it('should parse expressions in json template', function (done) {
     var mirage     = Mirage.create();
-    mirage.post("/repeater").sendFile("sample/repeater.json");
+    mirage.post("/repeater").sendFile("sample/repeater-request.json");
 
     request(mirage.app)
         .post("/repeater")

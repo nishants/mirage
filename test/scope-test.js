@@ -56,15 +56,13 @@ describe('Execute JS', function() {
             return "bar";
           }
         }),
-        expression = '{{name + "-" + foo()}}';
+        expression = '{{name + "-" + foo() +"-"+ bar()}}';
 
-    expect(childScope.execute(expression)).to.equal("outer-foo");
+    expect(childScope.execute(expression)).to.equal("outer-foo-bar");
   });
 
   it('should escape strings in expressions', function () {
-    var scope = scopes.create({
-          name: "scope-name"
-        }),
+    var scope      = scopes.create({name: "scope-name"}),
         expression = "{{name + ''}}";
 
     expect(scope.execute(expression)).to.equal("scope-name");
