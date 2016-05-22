@@ -40,9 +40,12 @@ module.exports = {
       });
     }
     for(var i =0; i < directives.length; i++){
-      var params =  template[directives[i].name];
+      var params =  template[directives[i].name],
+          directive = directives[i];
+
       delete template[directives[i].name];
-      template = directives[i].directive.link(scope, template, params);
+      var replace = directives[i].directive.link(scope, template, params);
+      template = replace || require("./compiler").compile(scope, template);
     }
     return template;
   },

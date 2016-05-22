@@ -39,7 +39,6 @@ describe('Directive Definitions', function() {
 
     directives.add("@foo", {
       link: function(scope, body, param){
-        expect(param).to.equal("foo-param");
         return {child: "bar"};
       }
     });
@@ -47,5 +46,31 @@ describe('Directive Definitions', function() {
     result = compiler.compile(scope, template);
     expect(result.data.fooTarget.child).to.equal("bar");
   });
+
+  it('should apply nested directives', function () {
+    var scope    = scopes.create({id: 1}),
+        template = {
+          "data" : {
+            "fooTarget" : {
+              "@foo" : "foo-param",
+              "fooTarget" : {
+                "@foo" : "foo-param"
+              }
+            }
+          }
+        },
+        result ;
+
+    directives.add("@foo", {
+      link: function(scope, body){
+        body.child = "foodified";
+      }
+    });
+
+    result = compiler.compile(scope, template);
+    expect(result.data.fooTarget.child).to.equal("foodified");
+    expect(result.data.fooTarget.fooTarget.child).to.equal("foodified");
+  });
+
 
 });
