@@ -1,16 +1,15 @@
 var expect  = require('chai').expect,
-    http    = require("http"),
-    Mirage = require("../src/mirage"),
+    mirage  = require("../src/mirage"),
     request = require('supertest');
 
 describe('Mirage', function() {
 
   it('should parse expressions in json template', function (done) {
-    var mirage     = Mirage.create();
+    var app  = mirage.create();
 
-    mirage.get("/user").sendFile("sample/hello.json");
+    app.get("/user").sendFile("sample/hello.json");
 
-    request(mirage.app)
+    request(app.app)
         .get("/user", "")
         .expect("Content-Type", /json/)
         .expect(200)
@@ -22,11 +21,11 @@ describe('Mirage', function() {
   });
 
   it('should add request header in template scope', function (done) {
-    var mirage     = Mirage.create();
+    var app  = mirage.create();
 
-    mirage.get("/user").sendFile("sample/headers.json");
+    app.get("/user").sendFile("sample/headers.json");
 
-    request(mirage.app)
+    request(app.app)
         .get("/user", "")
         .expect("Content-Type", /json/)
         .expect(200)
@@ -37,11 +36,11 @@ describe('Mirage', function() {
   });
 
   it('should add request body in template scope', function (done) {
-    var mirage     = Mirage.create();
+    var app  = mirage.create();
 
-    mirage.post("/user").sendFile("sample/create.json");
+    app.post("/user").sendFile("sample/create.json");
 
-    request(mirage.app)
+    request(app.app)
         .post("/user")
         .send({name: "My User", address: {street: "My Home"}})
         .expect("Content-Type", /json/)
@@ -55,11 +54,11 @@ describe('Mirage', function() {
   });
 
   it('should add request path param to template scope', function (done) {
-    var mirage     = Mirage.create();
+    var app  = mirage.create();
 
-    mirage.get("/user/:id").sendFile("sample/request-path-param.json");
+    app.get("/user/:id").sendFile("sample/request-path-param.json");
 
-    request(mirage.app)
+    request(app.app)
         .get("/user/21")
         .expect("Content-Type", /json/)
         .expect(200)
@@ -70,10 +69,10 @@ describe('Mirage', function() {
   });
 
   it('should add url params to template scope', function (done) {
-    var mirage     = Mirage.create();
-    mirage.get("/user").sendFile("sample/request-url-param.json");
+    var app  = mirage.create();
+    app.get("/user").sendFile("sample/request-url-param.json");
 
-    request(mirage.app)
+    request(app.app)
         .get("/user"+encodeURI("?search=who wat that&page=1&size=10"))
         .expect("Content-Type", /json/)
         .expect(200)
@@ -87,7 +86,7 @@ describe('Mirage', function() {
 
 
   it('should support returning data from controller', function (done) {
-    var mirage     = Mirage.create(),
+    var app  = mirage.create(),
         myController = function (scope) {
           scope.response = {
             message: "Successfully created item!.",
@@ -95,11 +94,11 @@ describe('Mirage', function() {
           };
         };
 
-    mirage.post("/controller")
+    app.post("/controller")
           .sendFile("sample/hello-controller.json")
           .controller(myController);
 
-    request(mirage.app)
+    request(app.app)
         .post("/controller")
         .send({items: [{name: "one"},{name: "two"},{name: "three"}]})
         .expect("Content-Type", /json/)
@@ -107,18 +106,16 @@ describe('Mirage', function() {
         .end(function(err, res) {
           var result = res.body.items;
           expect(res.body.message).to.equal("Successfully created item!.");
-          //expect(result[0].name).to.equal("controllified-one");
-          //expect(result[1].name).to.equal("controllified-two");
           done();
         });
   });
 
   describe.skip('InBuilt Directives', function() {
     it('should support @repeat directive', function (done) {
-      var mirage     = Mirage.create();
-      mirage.post("/repeater").sendFile("sample/repeater-request.json");
+      var app  = mirage.create();
+      app.post("/repeater").sendFile("sample/repeater-request.json");
 
-      request(mirage.app)
+      request(app.app)
           .post("/repeater")
           .send({items: [{name: "one"},{name: "two"},{name: "three"}]})
           .expect("Content-Type", /json/)

@@ -1,4 +1,4 @@
-var mirage     = Mirage.create();
+var mirage     = mirage.create();
 
 mirage.post("/hello-controller")
     .sendFile("hello-controller.json")

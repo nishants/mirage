@@ -67,6 +67,7 @@ describe('Execute JS', function() {
 
     expect(scope.execute(expression)).to.equal("scope-name");
   });
+
   it('should override parent scope', function () {
     var scope      = scopes.create({name: "parent-name"}),
         child      = scope.createChild({name: "child-name"}),
