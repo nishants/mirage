@@ -25,10 +25,11 @@ module.exports = {
   get: function(name){
     return all[name];
   },
-  on: function (name, param) {
+  on: function (name) {
     return {
       link: function(scope, element, param){
-        //return all[name] ? all[name].link(scope, element, param) : function(){};
+        delete element[name];
+        return all[name] ? all[name].link(scope, element, param) : function(){};
       }
     };
   }};
