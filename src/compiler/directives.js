@@ -25,18 +25,10 @@ module.exports = {
   get: function(name){
     return all[name];
   },
-  search: function (element) {
-    var found =[];
-    for(var child in element){
-      child.startsWith("@") ? found.push({
-        directive: all[child],
-        param: element[child],
-      }) && (delete element[child]) :"";
-    }
+  on: function (name, param) {
     return {
-      list: found,
-      link: function(scope, element){
-        return this.list.length ? this.list[0].directive.link(scope, element, this.list[0].param) : function(){};
+      link: function(scope, element, param){
+        //return all[name] ? all[name].link(scope, element, param) : function(){};
       }
     };
   }};
