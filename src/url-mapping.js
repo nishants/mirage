@@ -9,8 +9,7 @@ module.exports  = {
       service: function(){
         var self = this;
         return function(req, res){
-          var controller = self._controller || controllers.none();
-          return controller.service(req, res, self._action);
+          (self._controller || controllers.none()).service(req, res, self._action);
         }
       },
       sendFile: function(path){
