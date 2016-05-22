@@ -1,5 +1,5 @@
 var fs        = require("fs"),
-    compiler  = require("./compiler/compiler");
+    compiler  = require("./jsong/compiler");
 
 var sendFile = function (path) {
       return {

@@ -12,7 +12,7 @@ var all = {
   //      params[varName]   = list[index];
   //      params["$index"]  = index+"";
   //      var newScope      = scope.createChild(params);
-  //      parsed[index]     = require("./compiler").compile(newScope, element)
+  //      parsed[index]     = require("./jsong").compile(newScope, element)
   //    }
   //
   //    return parsed;

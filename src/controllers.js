@@ -1,4 +1,4 @@
-var scopes    = require("./compiler/scope"),
+var scopes    = require("./jsong/scope"),
     Controller = function(_ctrl){
       this._ctrl = _ctrl;
     };

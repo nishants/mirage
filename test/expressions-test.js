@@ -1,5 +1,5 @@
 var expect  = require('chai').expect,
-    scopes  = require("../src/compiler/scope");
+    scopes  = require("../src/jsong/scope");
 
 describe('Execute JS', function() {
 

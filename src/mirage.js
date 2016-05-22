@@ -1,9 +1,9 @@
 var express     = require('express'),
     mappings    = require('./url-mapping'),
     bodyParser  = require('body-parser'),
-    scopes      = require('../src/compiler/scope'),
-    compiler    = require('../src/compiler/compiler'),
-    directives  = require("../src/compiler/directives");
+    scopes      = require('./jsong/scope'),
+    compiler    = require('./jsong/compiler'),
+    directives  = require("./jsong/directives");
 
 module.exports  = {
   create: function(){
