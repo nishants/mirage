@@ -25,12 +25,17 @@ module.exports = {
   get: function(name){
     return all[name];
   },
-  preLink: function(){
-
+  link: function(scope, template, param){
+    var directives = [];
+    for(var field in template){
+      field.startsWith("@") && directives.push(all[field]);
+    }
+    for(var directive in directives){
+      template =  directive.link(scope, template, delete template[field]);
+    }
+    return template;
   },
-  postLink: function(){
 
-  },
   on: function (name) {
     return {
       link: function(scope, element, param){
