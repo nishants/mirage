@@ -5,13 +5,17 @@ module.exports = {
   compile: function (scope, template) {
     var result = {},
         hasDirective= function(){
-          for(var field in template[node]){
-            if(node.startsWith("@")) return true;
+          for(var field in template){
+            if(field.startsWith("@")) {
+              return true;
+            }
           }
           return false;
         };
 
-    //if(hasDirective()) {return directives.link(scope, template);}
+    if(hasDirective()) {
+      return directives.link(scope, template);
+    }
 
     for (var node in template) {
       var value       = template[node],

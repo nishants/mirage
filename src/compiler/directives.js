@@ -25,22 +25,19 @@ module.exports = {
   get: function(name){
     return all[name];
   },
-  link: function(scope, template, param){
+  link: function(scope, template){
     var directives = [];
     for(var field in template){
-      field.startsWith("@") && directives.push(all[field]);
+      field.startsWith("@") && directives.push({
+        name: field,
+        directive: all[field]
+      });
     }
-    for(var directive in directives){
-      template =  directive.link(scope, template, delete template[field]);
+    for(var i =0; i < directives.length; i++){
+      var params =  template[directives[i].name];
+      delete template[directives[i].name];
+      template = directives[i].directive.link(scope, template, params);
     }
     return template;
   },
-
-  on: function (name) {
-    return {
-      link: function(scope, element, param){
-        delete element[name];
-        return all[name] ? all[name].link(scope, element, param) : function(){};
-      }
-    };
-  }};
+};

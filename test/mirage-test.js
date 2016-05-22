@@ -85,26 +85,26 @@ describe('Mirage', function() {
         });
   });
 
-  //it('should support @repeat directive', function (done) {
-  //  var mirage     = Mirage.create();
-  //  mirage.post("/repeater").sendFile("sample/repeater-request.json");
-  //
-  //  request(mirage.app)
-  //      .post("/repeater")
-  //      .send({items: [{name: "one"},{name: "two"},{name: "three"}]})
-  //      .expect("Content-Type", /json/)
-  //      .expect(200)
-  //      .end(function(err, res) {
-  //        var repeated = res.body.items;
-  //        expect(repeated[0].name).to.equal("one");
-  //        expect(repeated[0].id).to.equal("0");
-  //        expect(repeated[1].name).to.equal("two");
-  //        expect(repeated[1].id).to.equal("1");
-  //        expect(repeated[2].name).to.equal("three");
-  //        expect(repeated[2].id).to.equal("2");
-  //        done();
-  //      });
-  //});
+  it('should support @repeat directive', function (done) {
+    var mirage     = Mirage.create();
+    mirage.post("/repeater").sendFile("sample/repeater-request.json");
+
+    request(mirage.app)
+        .post("/repeater")
+        .send({items: [{name: "one"},{name: "two"},{name: "three"}]})
+        .expect("Content-Type", /json/)
+        .expect(200)
+        .end(function(err, res) {
+          var repeated = res.body.items;
+          expect(repeated[0].name).to.equal("one");
+          expect(repeated[0].id).to.equal("0");
+          expect(repeated[1].name).to.equal("two");
+          expect(repeated[1].id).to.equal("1");
+          expect(repeated[2].name).to.equal("three");
+          expect(repeated[2].id).to.equal("2");
+          done();
+        });
+  });
 
   it('should support returning data from controller', function (done) {
     var mirage     = Mirage.create(),
