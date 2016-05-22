@@ -83,4 +83,11 @@ describe('Execute JS', function() {
 
     expect(scope.execute(expression)).to.equal(expectedErrorMessage);
   });
+
+  it('should return number type if expression resolves to number', function () {
+    var scope      = scopes.create({id: 1}),
+        expression = "{{id}}";
+
+    expect(scope.execute(expression)).to.equal(1);
+  });
 });
