@@ -104,5 +104,35 @@ describe('Mirage', function() {
           expect(repeated[2].id).to.equal("2");
           done();
         });
-  })
+  });
+
+  it('should support returning data from controller', function (done) {
+    var mirage     = Mirage.create(),
+        myController = [function (scope) {
+          return {
+            then: function (success, error) {
+              scope.response = {
+                message: "Successfully created item!.",
+                items: [{id: 101, name: "one"}, {id: 102, name: "two"}],
+              };
+              success(201);
+            }
+          }
+        }];
+
+    mirage.post("/controller")
+          .sendFile("sample/repeater-request.json")
+          .controller(myController);
+
+    request(mirage.app)
+        .post("/controller")
+        .send({items: [{name: "one"},{name: "two"},{name: "three"}]})
+        .expect("Content-Type", /json/)
+        .expect(201)
+        .end(function(err, res) {
+
+          done();
+        });
+  });
+
 });
