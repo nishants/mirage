@@ -13,6 +13,12 @@ mirage.get("/check").sendFile("../sample/nested-repeater.json").controller(funct
 mirage.get("/samples/hello").sendFile("../sample/hello/template.json");
 mirage.post("/samples/request").sendFile("../sample/request/template.json");
 
+mirage.get("/samples/controller")
+    .sendFile("../sample/controller/template.json")
+    .controller(function(scope){
+      scope.message = "Controllified !";
+    });
+
 mirage.app.listen(3001, function () {
   console.log('Example app listening on port 3000!');
 });
