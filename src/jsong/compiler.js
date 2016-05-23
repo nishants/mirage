@@ -1,10 +1,11 @@
 var linker = require("./linker"),
     scopes = require("./scope"),
+    templates = require("./templates"),
     directives = require("./directives");
 
 module.exports = {
   $compile: function (scope, template) {
-    return this.compile(scopes.create(scope), template);
+    return this.compile(scopes.create(scope), templates.create(template));
   },
   compile: function (scope, template) {
     var result = {},

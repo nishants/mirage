@@ -1,0 +1,8 @@
+{
+  "body": {
+    "list" : {
+      "@repeat" : "outer in list",
+      "id" : "{{$index + 1}}"
+    }
+  }
+}
