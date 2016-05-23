@@ -25,7 +25,7 @@ var Directives = {
       });
     }
     param = template[directive.name];
-    delete template[directive.name];
+    template.deleteDirective(directive.name)
 
     var replace = directive.directive.link(scope, template, param, compile);
     template = replace || compile(scope, template); // replace if directive returns valid value, else compile the template after directoryis done

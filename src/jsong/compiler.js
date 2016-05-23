@@ -5,7 +5,7 @@ var linker = require("./linker"),
 
 module.exports = {
   $compile: function (scope, template) {
-    return this.compile(scopes.create(scope), templates.create(template));
+    return this.compile(scopes.create(scope), template);
   },
   compile: function (scope, template) {
     var result = {},
@@ -22,6 +22,9 @@ module.exports = {
           return self.compile(scope, template);
         };
 
+    //TODO invoke compile through $comiple (always)
+    template.__ || (template = templates.create(template));
+
     if(hasDirective()) {
       return directives.link(scope, template, compile);
     }
@@ -32,6 +35,6 @@ module.exports = {
 
       result[node] = isSubtree ? this.compile(scope, value) : linker.link(scope, value);
     }
-    return result;
+    return result.render();
   }
 };
