@@ -27,7 +27,7 @@ var create = function(template){
   };
 
   return template
-    };
+};
 
 module.exports = {
   create: function(template){

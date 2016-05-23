@@ -9,14 +9,6 @@ module.exports = {
   },
   compile: function (scope, template) {
     var result = {},
-        hasDirective= function(){
-          for(var field in template){
-            if(field.startsWith("@")) {
-              return true;
-            }
-          }
-          return false;
-        },
         self = this,
         compile = function(scope, template){
           return self.compile(scope, template);
@@ -25,7 +17,7 @@ module.exports = {
     //TODO invoke compile through $comiple (always)
     template.__ || (template = templates.create(template));
 
-    if(hasDirective()) {
+    if(template.isDirective()) {
       return directives.link(scope, template, compile);
     }
 
