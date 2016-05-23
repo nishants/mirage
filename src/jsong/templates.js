@@ -1,5 +1,6 @@
+var extend = require("extend");
 var create = function(template){
-      template.__ = true; //for trnsitioning to template model
+      template.__ = true; //TODO for trnsitioning to template model
       template.deleteDirective = function(name){
         delete this[name];
       };
@@ -15,10 +16,17 @@ var create = function(template){
       delete this.render;
       delete this.deleteDirective;
       delete this.__;
+      delete this.copy;
       return this;
-    }
+    };
 
-    return template
+  template.copy = function(){
+    var result = {};
+    extend(true, result, this);
+    return result;
+  };
+
+  return template
     };
 
 module.exports = {

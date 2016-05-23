@@ -57,7 +57,7 @@ describe('Repeater', function() {
     expect(result.list[0].value).to.eql([{id: "a1"}, {id: "a2"}, {id: "a3"}]);
   });
 
-  it.skip('should support nested repeat', function () {
+  it('should support nested repeat', function () {
     var scope       = {list : [["a1", "a2", "a3"],["b1", "b2", "b3"]]},
         template = {
           "list" : {

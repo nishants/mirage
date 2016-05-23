@@ -13,4 +13,13 @@ describe('TemplateTest', function() {
     expect(notHas.isDirective()).to.equal(false);
     expect(has.isDirective()).to.equal(true);
   });
+
+  it('template.copy should return deep copy of current template', function () {
+    var template    = temlpates.create({"id": 1, "name": "My Name"}),
+        templateOne = template.copy();
+
+    expect(template).to.deep.equal(templateOne);
+    templateOne.id = "replaced";
+    expect(template.id).to.deep.equal(1);
+  });
 });
