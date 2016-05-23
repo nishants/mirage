@@ -30,7 +30,34 @@ describe('Repeater', function() {
     expect(result.data[1].name).to.equal(expected.data[1].name);
     expect(result.data[2].name).to.equal(expected.data[2].name);
   });
-  it.skip('should allow nested repeaters', function () {
+
+  it('should allow nested repeaters', function () {
+    var scope       = {list : [["a1", "a2", "a3"]]},
+        template = {
+          "list" : {
+            "@repeat" : "outer in list",
+            "id" : "{{$index + 1}}",
+            "value" :{
+              "@repeat" : "inner in outer",
+              "id" : "{{inner}}"
+            }
+          }
+        },
+        expected = {
+          list : [
+            {id: 1, value: [{id: "a1"}, {id: "a2"}, {id: "a3"}]}
+          ]
+        },
+        result ;
+
+    result = compiler.$compile(scope, template);
+
+    expect(result.list.length).to.equal(1);
+    expect(result.list[0].id).to.equal(expected.list[0].id);
+    expect(result.list[0].value).to.eql([{id: "a1"}, {id: "a2"}, {id: "a3"}]);
+  });
+
+  it.skip('should support nested repeat', function () {
     var scope       = {list : [["a1", "a2", "a3"],["b1", "b2", "b3"]]},
         template = {
           "list" : {
