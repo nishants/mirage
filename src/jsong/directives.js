@@ -1,46 +1,31 @@
-var all = {
-  //"@repeat": {
-  //  scope: true,
-  //  link: function(scope, element, param){
-  //    var varName   =  param.split("in")[0].trim(),
-  //        listName  = param.split("in")[1].trim(),
-  //        list      = scope.execute(listName),
-  //        parsed    = [];
-  //
-  //    for(var index = 0;index < list.length; index ++){
-  //      var params = {};
-  //      params[varName]   = list[index];
-  //      params["$index"]  = index+"";
-  //      var newScope      = scope.createChild(params);
-  //      parsed[index]     = require("./jsong").compile(newScope, element)
-  //    }
-  //
-  //    return parsed;
-  //  }
-  //}
-};
+var repeater = require("./directives/repeat"),
+    scopes = require("./scope"),
+    all = {};
 
-module.exports = {
+var inbuiltDirectives = function(){
+  var repeater = require("./repeater");
+  all[repeater.name] = {link: repeater.link};
+ };
+
+var Directives = {
   all: all,
-  get: function(name){
+  get: function (name) {
     return all[name];
   },
-  add: function(name, definition){
-    all[name] = {
-      scope: false,
-      link : definition.link
-    };
+  add: function (name, definition) {
+    all[name] = {link: definition.link};
   },
-  link: function(scope, template, compile){
+  link: function (scope, template, compile) {
     var directives = [];
-    for(var field in template){
+    scope.$scope || (scope = scopes.create(scope));
+    for (var field in template) {
       field.startsWith("@") && directives.push({
         name: field,
         directive: all[field]
       });
     }
-    for(var i =0; i < directives.length; i++){
-      var params =  template[directives[i].name],
+    for (var i = 0; i < directives.length; i++) {
+      var params = template[directives[i].name],
           directive = directives[i];
 
       delete template[directives[i].name];
@@ -50,3 +35,5 @@ module.exports = {
     return template;
   },
 };
+Directives.add("@repeat", {link: repeater.link});
+module.exports = Directives;
