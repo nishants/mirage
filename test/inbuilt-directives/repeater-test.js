@@ -20,7 +20,7 @@ describe('Repeater', function() {
         },
         result ;
 
-    result = compiler.compile(scope, template);
+    result = compiler.$compile(scope, template);
 
     expect(result.data.length).to.equal(3);
     expect(result.data[0].id).to.equal(expected.data[0].id);
@@ -50,7 +50,7 @@ describe('Repeater', function() {
         },
         result ;
 
-    result = compiler.compile(scope, template);
+    result = compiler.$compile(scope, template);
 
     expect(result.list.length).to.equal(2);
     expect(result.list[0].id).to.equal(expected.list[0].id);

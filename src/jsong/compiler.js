@@ -1,7 +1,11 @@
 var linker = require("./linker"),
+    scopes = require("./scope"),
     directives = require("./directives");
 
 module.exports = {
+  $compile: function (scope, template) {
+    return this.compile(scopes.create(scope), template);
+  },
   compile: function (scope, template) {
     var result = {},
         hasDirective= function(){
