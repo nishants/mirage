@@ -1,5 +1,4 @@
 var repeater = require("./directives/repeat"),
-    scopes = require("./scope"),
     all = {};
 
 var inbuiltDirectives = function(){
@@ -18,8 +17,6 @@ var Directives = {
   link: function (scope, template, compile) {
     var directive,
         param;
-
-    scope.$scope || (scope = scopes.create(scope));
 
     for (var field in template) {
       field.startsWith("@") && (directive = {
