@@ -16,24 +16,24 @@ var Directives = {
     all[name] = {link: definition.link};
   },
   link: function (scope, template, compile) {
-    var directives = [];
+    var directive,
+        param;
+
     scope.$scope || (scope = scopes.create(scope));
+
     for (var field in template) {
-      field.startsWith("@") && directives.push({
+      field.startsWith("@") && (directive = {
         name: field,
         directive: all[field]
       });
     }
-    for (var i = 0; i < directives.length; i++) {
-      var params = template[directives[i].name],
-          directive = directives[i];
+    param = template[directive.name];
+    delete template[directive.name];
 
-      delete template[directives[i].name];
-      var replace = directives[i].directive.link(scope, template, params, compile);
-      template = replace || compile(scope, template); // replace if directive returns valid value, else compile the template after directoryis done
-    }
+    var replace = directive.directive.link(scope, template, param, compile);
+    template = replace || compile(scope, template); // replace if directive returns valid value, else compile the template after directoryis done
     return template;
-  },
+  }
 };
 Directives.add("@repeat", {link: repeater.link});
 module.exports = Directives;

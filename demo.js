@@ -6,6 +6,10 @@ mirage.get("/params").sendFile("../sample/request-url-param.json");
 mirage.get("/hello").sendFile("../sample/hello.json");
 mirage.post("/repeater").sendFile("../sample/repeater-inline.json");
 
-mirage.app.listen(3000, function () {
+mirage.get("/check").sendFile("../sample/test.json").controller(function(scope){
+  scope.list = [["a1", "a2", "a3"],["b1", "b2", "b3"]];
+});
+
+mirage.app.listen(3001, function () {
   console.log('Example app listening on port 3000!');
 });

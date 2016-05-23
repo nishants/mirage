@@ -1,7 +1,7 @@
 module.exports = {
   link: function(scope, template, params, compile){
-    var varName   = params.split("in")[0].trim(),
-        listName  = params.split("in")[1].trim(),
+    var varName   = params.split(" in ")[0].trim(),
+        listName  = params.split(" in ")[1].trim(),
         list      = scope.execute(listName),
         parsed    = [];
 

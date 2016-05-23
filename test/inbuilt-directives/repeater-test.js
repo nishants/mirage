@@ -30,33 +30,33 @@ describe('Repeater', function() {
     expect(result.data[1].name).to.equal(expected.data[1].name);
     expect(result.data[2].name).to.equal(expected.data[2].name);
   });
-  it('should allow nested repeaters', function () {
-    var scope       = {list : [["a1", "a2", "a3"],["b1", "b2", "b3"],["c1", "c2", "c3"]]},
+  it.skip('should allow nested repeaters', function () {
+    var scope       = {list : [["a1", "a2", "a3"],["b1", "b2", "b3"]]},
         template = {
           "list" : {
             "@repeat" : "outer in list",
             "id" : "{{$index + 1}}",
-            "value" :"{{outer}}"
+            "value" :{
+              "@repeat" : "inner in outer",
+              "id" : "{{inner}}"
+            }
           }
         },
         expected = {
           list : [
-            {id: 1, value: ["a1", "a2", "a3"]},
-            {id: 2, value: ["b1", "b2", "b3"]},
-            {id: 3, value: ["c1", "c2", "c3"]}
+            {id: 1, value: [{id: "a1"}, {id: "a2"}, {id: "a3"}]},
+            {id: 2, value: [{id: "b1"}, {id: "b2"}, {id: "b3"}]}
           ]
         },
         result ;
 
     result = compiler.compile(scope, template);
 
-    expect(result.list.length).to.equal(3);
+    expect(result.list.length).to.equal(2);
     expect(result.list[0].id).to.equal(expected.list[0].id);
     expect(result.list[1].id).to.equal(expected.list[1].id);
-    expect(result.list[2].id).to.equal(expected.list[2].id);
 
-    expect(result.list[0].value).to.eql(["a1", "a2", "a3"]);
-    expect(result.list[1].value).to.eql(["b1", "b2", "b3"]);
-    expect(result.list[2].value).to.eql(["c1", "c2", "c3"]);
+    expect(result.list[0].value).to.eql([{id: "a1"}, {id: "a2"}, {id: "a3"}]);
+    expect(result.list[1].value).to.eql([{id: "b1"}, {id: "b2"}, {id: "b3"}]);
   });
 });
