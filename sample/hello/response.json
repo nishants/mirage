@@ -1,0 +1,6 @@
+{
+  "message" : "hello",
+  "sum"     : 1,
+  "list"    : [{"id": 1}, {"id": 3}, {"id": 5}, {"id": 7}, {"id": 9}],
+  "boolean" : false
+}

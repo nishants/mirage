@@ -10,6 +10,9 @@ mirage.get("/check").sendFile("../sample/nested-repeater.json").controller(funct
   scope.list = [["a1", "a2", "a3"],["b1", "b2", "b3"], ["c1", "c2", "c3"]];
 });
 
+mirage.get("/samples/hello").sendFile("../sample/hello/template.json");
+mirage.post("/samples/request").sendFile("../sample/request/template.json");
+
 mirage.app.listen(3001, function () {
   console.log('Example app listening on port 3000!');
 });

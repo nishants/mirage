@@ -1,0 +1,10 @@
+{
+  "headers" : {"My-Header" : "Hello World!"},
+
+  "body": {
+    "message"   : "hello",
+    "sum"       : "{{0 + 1 }}",
+    "list"      : {"@repeat" : "count in [1,2,3,4,5]", "id": "{{$index + count}}"},
+    "boolean"   : "{{1 == 2}}"
+  }
+}
