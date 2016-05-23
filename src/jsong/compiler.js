@@ -11,10 +11,14 @@ module.exports = {
             }
           }
           return false;
+        },
+        self = this,
+        compile = function(scope, template){
+          return self.compile(scope, template);
         };
 
     if(hasDirective()) {
-      return directives.link(scope, template);
+      return directives.link(scope, template, compile);
     }
 
     for (var node in template) {
