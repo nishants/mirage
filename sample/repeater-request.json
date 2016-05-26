@@ -1,10 +1,13 @@
 {
   "body": {
     "id"      : "1",
-    "items"   : {
-      "@repeat" : "item in request.body.items",
-      "id"      : "{{$index}}",
-      "name"    : "{{item.name}}"
+    "list"   : {
+      "@repeat" : "outer in list",
+      "id" : "{{$index + 1}}",
+      "value" :{
+        "@repeat" : "inner in outer",
+        "id" : "{{inner}}"
+      }
     }
   }
 }
