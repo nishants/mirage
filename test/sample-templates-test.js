@@ -85,43 +85,53 @@ describe('Mirage', function() {
         });
   });
 
-
-  it('should support returning data from controller', function (done) {
+  it('[url-parameter] should add url params to template scope', function (done) {
     var app  = mirage.create(),
-        myController = function (scope) {
-          scope.response = {
-            message: "Successfully created item!.",
-            items: [{name: "controllified-one"}, {name: "controllified-two"}],
-          };
-        };
+        sample = fixture.sample("url-param");
 
-    app.post("/controller")
-          .sendFile("sample/hello-controller.json")
-          .controller(myController);
+    app.get("/url-param")
+        .sendFile(sample.templatePath());
 
     request(app.app)
-        .post("/controller")
-        .send({items: [{name: "one"},{name: "two"},{name: "three"}]})
+        .get("/url-param?search=who wat that&page=1&size=10")
         .expect("Content-Type", /json/)
-        .expect(201)
+        .expect(200)
         .end(function(err, res) {
-          var result = res.body.items;
-          expect(res.body.message).to.equal("Successfully created item!.");
+          expect(res.body).to.eql(sample.responseBody());
+          done();
+        });
+  });
+
+  it('[controller] should support returning data from controller', function (done) {
+    var app  = mirage.create(),
+        controller = fixture.sample("controller");
+    app.get("/controller")
+        .sendFile(controller.templatePath())
+        .controller(function(scope){
+          scope.message = "Controllified !";
+        });
+    request(app.app)
+        .get("/controller")
+        .expect("Content-Type", /json/)
+        .expect(200)
+        .end(function(err, res) {
+          expect(res.body).to.eql(controller.responseBody());
           done();
         });
   });
 
   describe('InBuilt Directives', function() {
-    it('should support @repeat directive', function (done) {
-      var app  = mirage.create();
-      app.get("/repeater").sendFile("sample/repeater/template.json");
+    it('[repeater] should support @repeat directive', function (done) {
+      var app  = mirage.create(),
+          repeater = fixture.sample("repeater");
+      app.get("/repeater").sendFile(repeater.templatePath());
 
       request(app.app)
           .get("/repeater")
           .expect("Content-Type", /json/)
           .expect(200)
           .end(function(err, res) {
-            expect(res.body).to.eql(fixture.file("repeater/response"));
+            expect(res.body).to.eql(repeater.responseBody());
             done();
           });
     });
