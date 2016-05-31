@@ -1,5 +1,6 @@
 var expect  = require('chai').expect,
     mirage  = require("../src/mirage"),
+    fixture = require("./support/fixture"),
     request = require('supertest');
 
 describe('Mirage', function() {
@@ -110,24 +111,17 @@ describe('Mirage', function() {
         });
   });
 
-  describe.skip('InBuilt Directives', function() {
+  describe('InBuilt Directives', function() {
     it('should support @repeat directive', function (done) {
       var app  = mirage.create();
-      app.post("/repeater").sendFile("sample/repeater-request.json");
+      app.get("/repeater").sendFile("sample/repeater/template.json");
 
       request(app.app)
-          .post("/repeater")
-          .send({items: [{name: "one"},{name: "two"},{name: "three"}]})
+          .get("/repeater")
           .expect("Content-Type", /json/)
           .expect(200)
           .end(function(err, res) {
-            var repeated = res.body.items;
-            expect(repeated[0].name).to.equal("one");
-            expect(repeated[0].id).to.equal("0");
-            expect(repeated[1].name).to.equal("two");
-            expect(repeated[1].id).to.equal("1");
-            expect(repeated[2].name).to.equal("three");
-            expect(repeated[2].id).to.equal("2");
+            expect(res.body).to.eql(fixture.file("repeater/response"));
             done();
           });
     });

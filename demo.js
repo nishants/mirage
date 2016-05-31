@@ -20,6 +20,9 @@ mirage.get("/samples/controller")
       scope.message = "Controllified !";
     });
 
+mirage.get("/samples/repeater")
+    .sendFile("../sample/repeater/template.json");
+
 mirage.app.listen(3001, function () {
   console.log('Example app listening on port 3000!');
 });
