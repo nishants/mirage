@@ -1,5 +1,5 @@
 var fs        = require("fs"),
-    compiler  = require("./jsong/compiler");
+    compiler  = require("jso-ng");
 
 var sendFile = function (path) {
       return {
