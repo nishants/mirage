@@ -9,9 +9,6 @@ var pathFor = function(dir, file){
 };
 
 module.exports = {
-  file: function (path) {
-    return JSON.parse(fs.readFileSync("sample/<path>.json".replace("<path>", path)));
-  },
   sample: function (name) {
     return {
       templatePath: function(){return pathFor(name, "template.json");},

@@ -9,20 +9,6 @@ describe('Mirage', function() {
     app = mirage.create();
   });
 
-  it('should parse expressions in json template', function (done) {
-    app.get("/user").sendFile("sample/hello.json");
-
-    request(app.app)
-        .get("/user", "")
-        .expect("Content-Type", /json/)
-        .expect(200)
-        .end(function(err, res) {
-          expect(res.body.message).to.equal("hello");
-          expect(res.body.id).to.equal(1);
-          done();
-        });
-  });
-
   it('[templating] should add request header in template scope', function (done) {
     var sample = fixture.sample("templating");
 
