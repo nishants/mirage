@@ -1,13 +1,15 @@
 var expect  = require('chai').expect,
     mirage  = require("../src/mirage"),
     fixture = require("./support/fixture"),
-    request = require('supertest');
+    request = require('supertest'),
+    app;
 
 describe('Mirage', function() {
+  beforeEach(function(){
+    app = mirage.create();
+  });
 
   it('should parse expressions in json template', function (done) {
-    var app  = mirage.create();
-
     app.get("/user").sendFile("sample/hello.json");
 
     request(app.app)
@@ -22,8 +24,6 @@ describe('Mirage', function() {
   });
 
   it('should add request header in template scope', function (done) {
-    var app  = mirage.create();
-
     app.get("/user").sendFile("sample/headers.json");
 
     request(app.app)
@@ -37,8 +37,6 @@ describe('Mirage', function() {
   });
 
   it('should add request body in template scope', function (done) {
-    var app  = mirage.create();
-
     app.post("/user").sendFile("sample/create.json");
 
     request(app.app)
@@ -55,8 +53,6 @@ describe('Mirage', function() {
   });
 
   it('should add request path param to template scope', function (done) {
-    var app  = mirage.create();
-
     app.get("/user/:id").sendFile("sample/request-path-param.json");
 
     request(app.app)
@@ -70,7 +66,6 @@ describe('Mirage', function() {
   });
 
   it('should add url params to template scope', function (done) {
-    var app  = mirage.create();
     app.get("/user").sendFile("sample/request-url-param.json");
 
     request(app.app)
@@ -86,8 +81,7 @@ describe('Mirage', function() {
   });
 
   it('[url-parameter] should add url params to template scope', function (done) {
-    var app  = mirage.create(),
-        sample = fixture.sample("url-param");
+    var sample = fixture.sample("url-param");
 
     app.get("/url-param")
         .sendFile(sample.templatePath());
@@ -103,8 +97,7 @@ describe('Mirage', function() {
   });
 
   it('[controller] should support returning data from controller', function (done) {
-    var app  = mirage.create(),
-        controller = fixture.sample("controller");
+    var controller = fixture.sample("controller");
     app.get("/controller")
         .sendFile(controller.templatePath())
         .controller(function(scope){
@@ -122,8 +115,7 @@ describe('Mirage', function() {
 
   describe('InBuilt Directives', function() {
     it('[repeater] should support @repeat directive', function (done) {
-      var app  = mirage.create(),
-          repeater = fixture.sample("repeater");
+      var repeater = fixture.sample("repeater");
       app.get("/repeater").sendFile(repeater.templatePath());
 
       request(app.app)
