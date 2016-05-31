@@ -36,21 +36,22 @@ describe('Mirage', function() {
         });
   });
 
-  it('should add request body in template scope', function (done) {
-    app.post("/user").sendFile("sample/create.json");
+  it('[request-header] should add request header in template scope', function (done) {
+    var sample = fixture.sample("request-header");
+
+    app.get("/request-header")
+        .sendFile(sample.templatePath());
 
     request(app.app)
-        .post("/user")
-        .send({name: "My User", address: {street: "My Home"}})
+        .get("/request-header", "")
         .expect("Content-Type", /json/)
         .expect(200)
         .end(function(err, res) {
-          expect(res.body.id).to.equal("1");
-          expect(res.body.name).to.equal("My User");
-          expect(res.body.address.street).to.equal("My Home");
+          expect(res.header["my-header"]).to.equal("some-header");
           done();
         });
   });
+
   it('[request-body] should add request body in template scope', function (done) {
     var sample = fixture.sample("request-body");
 
@@ -67,7 +68,6 @@ describe('Mirage', function() {
           done();
         });
   });
-
 
   it('[path-parameter] should add path params to template scope', function (done) {
     var sample = fixture.sample("path-param");
