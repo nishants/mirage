@@ -37,17 +37,20 @@ describe('Mirage', function() {
   });
 
   it('[request-header] should add request header in template scope', function (done) {
-    var sample = fixture.sample("request-header");
+    var sample = fixture.sample("request-header"),
+        expectedHeader = 'some-header-from-request';;
 
     app.get("/request-header")
         .sendFile(sample.templatePath());
 
+
     request(app.app)
         .get("/request-header", "")
+        .set("my-header", expectedHeader)
         .expect("Content-Type", /json/)
         .expect(200)
         .end(function(err, res) {
-          expect(res.header["my-header"]).to.equal("some-header");
+          expect(res.header["my-header"]).to.equal(expectedHeader);
           done();
         });
   });
