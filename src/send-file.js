@@ -1,12 +1,11 @@
-var fs        = require("fs"),
-    compiler  = require("jso-ng");
+var fs        = require("fs");
 
-var sendFile = function (path) {
+var sendFile = function (path, compile) {
       return {
         path: path,
         send: function (req, res, scope) {
           var template    = JSON.parse(fs.readFileSync(this.path)),
-              parsed      = compiler.compile(scope, template),
+              parsed      = compile(scope, template),
               headers     = parsed.headers,
               responseBody= parsed.body;
 

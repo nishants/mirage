@@ -2,7 +2,7 @@ var sendFile    = require("./send-file"),
     controllers = require("./controllers");
 
 module.exports  = {
-  create: function(){
+  create: function(compile){
     return {
       _action     : null,
       _controller : null,
@@ -13,7 +13,7 @@ module.exports  = {
         }
       },
       sendFile: function(path){
-        this._action = sendFile(path);
+        this._action = sendFile(path, compile);
         return this;
       },
       controller: function(controller){
