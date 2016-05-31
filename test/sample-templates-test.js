@@ -51,16 +51,19 @@ describe('Mirage', function() {
           done();
         });
   });
+  it('[request-body] should add request body in template scope', function (done) {
+    var sample = fixture.sample("request-body");
 
-  it('should add request path param to template scope', function (done) {
-    app.get("/user/:id").sendFile("sample/request-path-param.json");
+    app.post("/request")
+        .sendFile(sample.templatePath());
 
     request(app.app)
-        .get("/user/21")
+        .post("/request")
+        .send(sample.requestBody())
         .expect("Content-Type", /json/)
         .expect(200)
         .end(function(err, res) {
-          expect(res.body.id).to.equal("21");
+          expect(res.body).to.eql(sample.responseBody());
           done();
         });
   });
