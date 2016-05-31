@@ -23,15 +23,19 @@ describe('Mirage', function() {
         });
   });
 
-  it('should add request header in template scope', function (done) {
-    app.get("/user").sendFile("sample/headers.json");
+  it('[templating] should add request header in template scope', function (done) {
+    var sample = fixture.sample("templating");
+
+    app.get("/templating")
+        .sendFile(sample.templatePath());
+
 
     request(app.app)
-        .get("/user", "")
+        .get("/templating", "")
         .expect("Content-Type", /json/)
         .expect(200)
         .end(function(err, res) {
-          expect(res.header["my-header"]).to.equal("Hello World!");
+          expect(res.body).to.eql(sample.responseBody());
           done();
         });
   });
