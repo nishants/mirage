@@ -65,17 +65,19 @@ describe('Mirage', function() {
         });
   });
 
-  it('should add url params to template scope', function (done) {
-    app.get("/user").sendFile("sample/request-url-param.json");
+
+  it('[path-parameter] should add path params to template scope', function (done) {
+    var sample = fixture.sample("path-param");
+
+    app.get("/user/:id")
+        .sendFile(sample.templatePath());
 
     request(app.app)
-        .get("/user"+encodeURI("?search=who wat that&page=1&size=10"))
+        .get("/user/1001001")
         .expect("Content-Type", /json/)
         .expect(200)
         .end(function(err, res) {
-          expect(res.body.search).to.equal("who wat that");
-          expect(res.body.page).to.equal("1");
-          expect(res.body.size).to.equal("10");
+          expect(res.body).to.eql(sample.responseBody());
           done();
         });
   });
