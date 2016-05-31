@@ -1,10 +1,6 @@
 var repeater = require("./directives/repeat"),
+    compileD = require("./directives/compile"),
     all = {};
-
-var inbuiltDirectives = function(){
-  var repeater = require("./repeater");
-  all[repeater.name] = {link: repeater.link};
- };
 
 var Directives = {
   all: all,
@@ -14,7 +10,7 @@ var Directives = {
   add: function (name, definition) {
     all[name] = {link: definition.link};
   },
-  link: function (scope, template, compile) {
+  link: function (scope, template, compile, parse) {
     var directive,
         param;
 
@@ -27,10 +23,11 @@ var Directives = {
     param = template[directive.name];
     template.deleteDirective(directive.name)
 
-    var replace = directive.directive.link(scope, template, param, compile);
+    var replace = directive.directive.link(scope, template, param, compile, parse);
     template = replace || compile(scope, template); // replace if directive returns valid value, else compile the template after directoryis done
     return template;
   }
 };
 Directives.add("@repeat", {link: repeater.link});
+Directives.add("@compile", {link: compileD.link});
 module.exports = Directives;

@@ -12,6 +12,7 @@ mirage.get("/check").sendFile("../sample/nested-repeater.json").controller(funct
 
 mirage.get("/samples/hello").sendFile("../sample/hello/template.json");
 mirage.post("/samples/request").sendFile("../sample/request/template.json");
+mirage.post("/mirror").sendFile("../sample/mirror/template.json");
 
 mirage.get("/samples/controller")
     .sendFile("../sample/controller/template.json")
@@ -22,3 +23,9 @@ mirage.get("/samples/controller")
 mirage.app.listen(3001, function () {
   console.log('Example app listening on port 3000!');
 });
+
+
+mirage.get("/samples/paths/one").sendFile("../sample/paths/one.json");
+mirage.get("/samples/paths/two").sendFile("../sample/paths/two.json");
+mirage.get("/samples/paths/:id").sendFile("../sample/paths/any.json");
+

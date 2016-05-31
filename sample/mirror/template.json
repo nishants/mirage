@@ -1,4 +1,5 @@
 {
   "body" : {
+    "@compile" : "request.body.template.body"
   }
 }
